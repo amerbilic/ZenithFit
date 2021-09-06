@@ -1,19 +1,32 @@
 {
-  "name": "zenith-fit",
+  "name": "ZenithFit-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Zenith Fit API",
+  "main": "src/server.js",
   "scripts": {
-    "install-server": "npm install --prefix",
-    "install-client": "npm install --client",
-    "install": "npm run install-server && npm run install-client",
-    "server": "npm run watch --prefix server",
-    "client": "npm start --prefix client",
-    "watch": "npm run server & npm run client",
-    "test": "npm run test --prefix server && npm run test --client"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "@prisma/client": "^2.30.3",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.6.0",
+    "redis": "^3.1.2",
+    "stripe": "^8.174.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "prisma": "^2.30.3"
+  }
 }
