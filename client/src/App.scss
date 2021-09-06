@@ -1,0 +1,30 @@
+:root {
+  --bg: #2b50aa;
+  --bg-accent: #484a4d;
+  --bg-highlight: #5DFDCB;
+  --text-color: #dadce1;
+  --nav-size: 35px;
+  --border-radius: 8px;
+  --speed: 500ms;
+}
+
+body {
+  font-family: "Urbanist", sans-serif;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}

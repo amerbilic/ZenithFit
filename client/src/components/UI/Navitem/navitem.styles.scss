@@ -1,0 +1,36 @@
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item-button {
+  cursor: pointer;
+  padding: 8px 25px;
+  color: white;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    background: var(--bg-highlight);
+    color: black;
+    transition: all 0.3s ease-out;
+  }
+}
+.bg-drop {
+  background: black;
+  height: 200px;
+  width: 200px;
+  opacity: 0.5;
+  z-index: -21;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.disable-select {
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
