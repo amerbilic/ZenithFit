@@ -4,7 +4,7 @@ import { articlesActions } from "../index";
 export const fetchArticlesData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await axios.get("http://localhost:8000/category/");
+      const response = await axios.get("/category/");
 
       const data = response.data;
       return data;
@@ -23,7 +23,7 @@ export const fetchCollectionData = (name) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:8000/category/articles/${name}`
+        `/category/articles/${name}`
       );
       const data = response.data.articles;
       return data;
@@ -43,7 +43,7 @@ export const fetchDetailData = (name) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:8000/articles/${name}`
+        `/articles/${name}`
       );
       const data = response.data;
       return data;

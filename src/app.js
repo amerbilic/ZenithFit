@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const createError = require("http-errors");
 const cors = require("cors");
+const path = require("path");
 require("./helpers/init_redis");
 
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
@@ -22,13 +23,6 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
-if ((process.env.NODE_ENV = "production")) {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  });
-}
-
 app.use("/articles", articlesRouter);
 app.use("/category", articleCategoryRouter);
 app.use("/address", addressRouter);
@@ -37,7 +31,6 @@ app.use("/auth", authRouter);
 app.use("/inventory", articleInventoryRouter);
 app.use("/discount", discountRouter);
 app.use("/users", userRouter);
-
 app.post("/payment", (req, res, next) => {
   const body = {
     source: req.body.token.id,
@@ -54,9 +47,16 @@ app.post("/payment", (req, res, next) => {
   });
 });
 
-app.use(async (req, res, next) => {
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
+
+/*app.use(async (req, res, next) => {
   next(createError.NotFound());
-});
+});*/
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
@@ -66,6 +66,10 @@ app.use((err, req, res, next) => {
       message: err.message,
     },
   });
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 module.exports = app;
