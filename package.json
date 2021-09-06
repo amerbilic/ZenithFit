@@ -1,5 +1,5 @@
 {
-  "name": "ZenithFit-api",
+  "name": "ZenithFit_API",
   "version": "1.0.0",
   "description": "Zenith Fit API",
   "main": "src/server.js",
