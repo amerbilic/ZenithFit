@@ -9,7 +9,7 @@ const {
 
 const addressRouter = express.Router();
 
-addressRouter.get("/",checkAuth, getAllAddresses);
+addressRouter.get("/", getAllAddresses);
 addressRouter.get("/:id", getAddressById);
 addressRouter.post("/", addAddress);
 addressRouter.delete("/:id", deleteAddress);

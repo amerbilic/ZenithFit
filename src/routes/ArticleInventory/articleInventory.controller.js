@@ -1,11 +1,9 @@
-const { PrismaClient } = require("@prisma/client");
+const prisma = require('../../helpers/prisma');
 const createError = require("http-errors");
-
-const { articleInventory } = new PrismaClient();
 
 const getAllInventories = async (req, res, next) => {
   try {
-    const inventories = await articleInventory.findMany({
+    const inventories = await prisma.articleInventory.findMany({
       select: {
         quantity: true,
         createdAt: true,
@@ -29,7 +27,7 @@ const updateInventory = async (req, res, next) => {
       throw createError.BadRequest("Please provide a valid number.");
     }
 
-    const checkInventory = await articleInventory.findFirst({
+    const checkInventory = await prisma.articleInventory.findFirst({
       where: {
         id,
       },
@@ -39,7 +37,7 @@ const updateInventory = async (req, res, next) => {
       throw createError.NotFound("Inventory by this Id does not exist.");
     }
 
-    const inventory = await articleInventory.update({
+    const inventory = await prisma.articleInventory.update({
       where: {
         id,
       },

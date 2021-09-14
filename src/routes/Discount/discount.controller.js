@@ -1,11 +1,9 @@
-const { PrismaClient } = require("@prisma/client");
+const prisma = require('../../helpers/prisma');
 const createError = require("http-errors");
-
-const { discount } = new PrismaClient();
 
 const getAllDiscounts = async (req, res, next) => {
   try {
-    const discounts = await discount.findMany({
+    const discounts = await prisma.discount.findMany({
       select: {
         name: true,
         desc: true,
@@ -24,7 +22,7 @@ const getDiscount = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
 
-    const findDiscount = await discount.findFirst({
+    const findDiscount = await prisma.discount.findFirst({
       where: {
         id,
       },
@@ -55,7 +53,7 @@ const createDiscount = async (req, res, next) => {
       throw createError.BadRequest("Please provide all the required fields.");
     }
     d;
-    const findDiscount = await discount.findFirst({
+    const findDiscount = await prisma.discount.findFirst({
       where: {
         name,
       },
@@ -65,7 +63,7 @@ const createDiscount = async (req, res, next) => {
       throw createError.Conflict("Discount by this name already exists.");
     }
 
-    await discount.create({
+    await prisma.discount.create({
       data: {
         name,
         desc,
@@ -84,7 +82,7 @@ const deleteDiscount = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
 
-    const findDiscount = await discount.findFirst({
+    const findDiscount = await prisma.discount.findFirst({
       where: {
         id,
       },
@@ -94,7 +92,7 @@ const deleteDiscount = async (req, res, next) => {
       throw createError.NotFound("Discount by this Id does not exist.");
     }
 
-    await discount.delete({
+    await prisma.discount.delete({
       where: {
         id,
       },
@@ -111,7 +109,7 @@ const updateDiscount = async (req, res, next) => {
     const id = parseInt(req.params.id);
     const { name, desc, discount_percent, active } = req.body;
 
-    const findDiscount = await discount.findFirst({
+    const findDiscount = await prisma.discount.findFirst({
       where: {
         id,
       },
@@ -125,7 +123,7 @@ const updateDiscount = async (req, res, next) => {
       throw createError.NotFound("Discount by this Id does not exist.");
     }
 
-    await discount.update({
+    await prisma.discount.update({
       where: {
         id,
       },

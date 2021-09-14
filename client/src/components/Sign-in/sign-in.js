@@ -26,12 +26,10 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      console.log("hey")
-      const res = await axios.post("http://localhost:8000/auth/login", {
+      const res = await axios.post("/auth/login", {
         email: Email,
         password: Password,
       });
-      console.log("hi");
       const expirationTime = new Date(new Date().getTime() + 3600000)
       authCtx.login(res.data.accessToken,expirationTime.toISOString());
       history.replace('/');

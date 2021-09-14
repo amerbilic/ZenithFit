@@ -1,11 +1,9 @@
-const { PrismaClient } = require("@prisma/client");
+const prisma = require('../../helpers/prisma');
 const createError = require("http-errors");
-
-const { address } = new PrismaClient();
 
 const getAllAddresses = async (req, res, next) => {
   try {
-    const allAddresses = await address.findMany({
+    const allAddresses = await prisma.address.findMany({
       select: {
         addressLine: true,
         city: true,
@@ -22,7 +20,7 @@ const getAllAddresses = async (req, res, next) => {
 const getAddressById = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const addressSearch = await address.findOne({
+    const addressSearch = await prisma.address.findFirst({
       where: {
         id: id,
       },
@@ -52,7 +50,7 @@ const addAddress = async (req, res, next) => {
       throw createError.BadRequest("Please provide all required fields.");
     }
     
-    const searchAddress = await address.findOne({
+    const searchAddress = await prisma.address.findFirst({
       where: {
         addressLine,
         city,
@@ -63,7 +61,7 @@ const addAddress = async (req, res, next) => {
       throw createError.Conflict("Address by this name already exists.");
     }
 
-    await address.create({
+    await prisma.address.create({
       data: {
         addressLine,
         city,
@@ -84,7 +82,7 @@ const deleteAddress = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
 
-    const findAddress = await address.findOne({
+    const findAddress = await prisma.address.findFirst({
       where: {
         id,
       },
@@ -93,7 +91,7 @@ const deleteAddress = async (req, res, next) => {
     if (!findAddress) {
       throw createError.NotFound("Address by this Id does not exist.");
     } else {
-      await address.delete({
+      await prisma.address.delete({
         where: {
           id,
         },

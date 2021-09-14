@@ -1,11 +1,9 @@
-const { PrismaClient } = require("@prisma/client");
+const  prisma  = require("../../helpers/prisma");
 const createError = require("http-errors");
-
-const { user } = new PrismaClient();
 
 const getAllUsers = async (req, res, next) => {
   try {
-    const getUsers = await user.findMany({
+    const getUsers = await prisma.user.findMany({
       select: {
         username: true,
         firstname: true,
@@ -28,7 +26,7 @@ const getUser = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
 
-    const getUsers = await user.findFirst({
+    const getUsers = await prisma.user.findFirst({
       where: {
         id,
       },
@@ -58,7 +56,7 @@ const deleteUser = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
 
-    const getUsers = await user.findFirst({
+    const getUsers = await prisma.user.findFirst({
       where: {
         id,
       },
@@ -67,7 +65,7 @@ const deleteUser = async (req, res, next) => {
     if (!getUsers)
       throw createError.NotFound("User with this Id does not exist.");
 
-    await user.delete({
+    await prisma.user.delete({
       where: {
         id,
       },
@@ -84,7 +82,7 @@ const updateUser = async (req, res, next) => {
     const id = parseInt(req.params.id);
     const { username, firstname, lastname, telephone } = req.body;
 
-    const getUsers = await user.findFirst({
+    const getUsers = await prisma.user.findFirst({
       where: {
         id,
       },
@@ -93,7 +91,7 @@ const updateUser = async (req, res, next) => {
     if (!getUsers)
       throw createError.NotFound("User with this Id does not exist.");
 
-    const updatedUser = await user.update({
+    const updatedUser = await prisma.user.update({
       where: {
         id,
       },

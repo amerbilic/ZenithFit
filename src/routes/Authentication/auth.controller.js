@@ -2,11 +2,9 @@ const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 const createError = require("http-errors");
 const client = require("../../helpers/init_redis");
-const { PrismaClient } = require("@prisma/client");
+const prisma = require('../../helpers/prisma');
 const { authSchema, loginSchema } = require("../../helpers/validation.schema");
 require("dotenv").config();
-
-const { user } = new PrismaClient();
 
 const signUp = async (req, res, next) => {
   try {
@@ -15,7 +13,7 @@ const signUp = async (req, res, next) => {
 
     const result = await authSchema.validateAsync(req.body);
 
-    const userEmail = await user.findFirst({
+    const userEmail = await prisma.user.findFirst({
       where: {
         email: result.email,
       },
@@ -23,7 +21,7 @@ const signUp = async (req, res, next) => {
         email: true,
       },
     });
-    const userUsername = await user.findFirst({
+    const userUsername = await prisma.user.findFirst({
       where: {
         username: result.username,
       },
@@ -38,7 +36,7 @@ const signUp = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const savedUser = await user.create({
+    const savedUser = await prisma.user.create({
       data: {
         email,
         password: hashedPassword,
@@ -99,7 +97,7 @@ const userLogin = async (req, res, next) => {
 
     console.log("one");
 
-    let findUser = await user.findFirst({
+    let findUser = await prisma.user.findFirst({
       where: {
         email,
       },
@@ -155,7 +153,7 @@ const userLogin = async (req, res, next) => {
       }
     });
 
-    res.json({ accessToken, refreshToken });
+    res.json({ accessToken, refreshToken,userId });
   } catch (err) {
     next(err);
   }

@@ -1,11 +1,9 @@
-const { PrismaClient } = require("@prisma/client");
+const prisma = require('../../helpers/prisma');
 const createError = require("http-errors");
-
-const { articleInventory, article } = new PrismaClient();
 
 const getAllArticles = async (req, res, next) => {
   try {
-    const articles = await article.findMany({
+    const articles = await prisma.article.findMany({
       select: {
         id: true,
         name: true,
@@ -32,7 +30,7 @@ const getArticleById = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
 
-    const searchArticle = await article.findFirst({
+    const searchArticle = await prisma.article.findFirst({
       where: {
         id,
       },
@@ -66,7 +64,7 @@ const deleteArticle = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
 
-    const searchArticle = await article.findFirst({
+    const searchArticle = await prisma.article.findFirst({
       where: {
         id,
       },
@@ -75,7 +73,7 @@ const deleteArticle = async (req, res, next) => {
     if (!searchArticle) {
       throw createError.NotFound("Article by this id not found.");
     } else {
-      await article.delete({
+      await prisma.article.delete({
         where: {
           id,
         },
@@ -95,7 +93,7 @@ const createArticle = async (req, res, next) => {
     if (!name || !desc || !price || !category_id || !quantity)
       throw createError.BadRequest("Please provide all the specified fields.");
 
-    const searchArticle = await article.findFirst({
+    const searchArticle = await prisma.article.findFirst({
       where: {
         name,
       },
@@ -105,7 +103,7 @@ const createArticle = async (req, res, next) => {
       throw createError.Conflict("Article by this name already exists.");
     }
 
-    await articleInventory.create({
+    await prisma.articleInventory.create({
       data: {
         quantity,
         articles: {

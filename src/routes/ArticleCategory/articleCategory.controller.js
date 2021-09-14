@@ -1,11 +1,9 @@
-const { PrismaClient } = require("@prisma/client");
+const prisma = require('../../helpers/prisma');
 const createError = require("http-errors");
-
-const { articleCategory } = new PrismaClient();
 
 const getAllCategories = async (req, res, next) => {
   try {
-    const categories = await articleCategory.findMany({
+    const categories = await prisma.articleCategory.findMany({
       include: {
         articles: {
           include: {
@@ -28,7 +26,7 @@ const addCategory = async (req, res, next) => {
     if (!name) {
       throw createError.BadRequest("Please provide a name.");
     }
-    const checkCategory = await articleCategory.findFirst({
+    const checkCategory = await prisma.articleCategory.findFirst({
       where: {
         name,
       },
@@ -54,7 +52,7 @@ const getCategoryById = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
 
-    const category = await articleCategory.findFirst({
+    const category = await prisma.articleCategory.findFirst({
       where: { id },
       select: {
         name: true,
@@ -78,14 +76,14 @@ const deleteCategory = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
 
-    const checkCategory = await articleCategory.findFirst({
+    const checkCategory = await prisma.articleCategory.findFirst({
       where: { id },
     });
 
     if (!checkCategory) {
       throw createError.NotFound("Category by this Id not found.");
     } else {
-      await article_category.delete({
+      await prisma.article_category.delete({
         where: { id },
       });
 
@@ -101,7 +99,7 @@ const getAllArticlesByCategory = async (req, res, next) => {
     const categoryName = req.params.name;
     console.log(categoryName);
 
-    const returnList = await articleCategory.findFirst({
+    const returnList = await prisma.articleCategory.findFirst({
       where: { name: categoryName },
       include: {
         articles: {

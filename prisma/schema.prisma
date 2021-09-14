@@ -134,7 +134,6 @@ model PaymentDetails {
   status String @db.VarChar(100)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  order_id Int
   order_details OrderDetails?
 }
 

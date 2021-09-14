@@ -45,7 +45,7 @@ const SignUp = (props) => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/auth/signup", {
+      const response = await axios.post("/auth/signup", {
         email: enteredEmail,
         password: enteredPassword,
         username: enteredUsername,
@@ -53,7 +53,8 @@ const SignUp = (props) => {
         lastname: "test22",
       });
       const expirationTime = new Date(new Date().getTime() + 3600000);
-      authCtx.login(response.data.accessToken, expirationTime.toISOString());
+      authCtx.login(response.data.accessToken, expirationTime.toISOString(),response.data.userId);
+      alert("Succesfully created an account, you can now login with your credentials!");
       console.log(response.data);
       history.replace("/");
     } catch (error) {
