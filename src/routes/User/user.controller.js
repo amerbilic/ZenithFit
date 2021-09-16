@@ -36,10 +36,9 @@ const getUser = async (req, res, next) => {
         lastname: true,
         telephone: true,
         status: true,
-        createdAt: true,
-        updatedAt: true,
         addresses: true,
         payments: true,
+        id:true
       },
     });
 

@@ -22,9 +22,7 @@ export const fetchArticlesData = () => {
 export const fetchCollectionData = (name) => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await axios.get(
-        `/category/articles/${name}`
-      );
+      const response = await axios.get(`/category/articles/${name}`);
       const data = response.data.articles;
       return data;
     };
@@ -42,9 +40,7 @@ export const fetchCollectionData = (name) => {
 export const fetchDetailData = (name) => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await axios.get(
-        `/articles/${name}`
-      );
+      const response = await axios.get(`/articles/${name}`);
       const data = response.data;
       return data;
     };

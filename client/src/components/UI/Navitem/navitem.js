@@ -3,23 +3,17 @@ import React, { useState } from "react";
 
 const Navitem = (props) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [isChildFocused, setIsChildFocused] = useState(false);
 
   const toggleOff = () => {
     setToggleDropdown(false);
-  }; 
+  };
 
   return (
     <li className="nav-item disable-select">
       <div
         className="nav-item-button disable-select"
-        onMouseEnter={() => {
+        onClick={() => {
           setToggleDropdown(!toggleDropdown);
-        }}
-        onMouseLeave={() => {
-          setTimeout(() => {
-            if (!isChildFocused) setToggleDropdown(!toggleDropdown);
-          }, 300);
         }}
       >
         {props.name}
@@ -28,7 +22,6 @@ const Navitem = (props) => {
         React.cloneElement(props.children, {
           toggleOff,
           toggleDropdown,
-          setIsChildFocused,
         })}
     </li>
   );

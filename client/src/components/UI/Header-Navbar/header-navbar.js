@@ -1,13 +1,12 @@
 import React from "react";
 import { Search } from "@material-ui/icons";
-import { Fragment } from "react";
-import AuthContext from "../../../store/auth-context";
-import { useContext } from "react";
+import { Fragment, useEffect } from "react";
 import CartDropdown from "../Cart-Dropdown/cart-dropdown";
 import CartIcon from "../Cart-Icon/cart-icon";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
+import { logOut } from "../../../store/Auth/loginSlice";
 import {
   Container,
   LinkItem,
@@ -23,17 +22,20 @@ import {
 } from "./header-navbar.styles";
 
 const HeaderNavbar = () => {
-  const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.isLoggedIn;
+  const isAuth = useSelector((state) => state.login.isAuth);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const cartToggle = useSelector((state) => state.cart.hidden);
 
-  useEffect(() => {
-    console.log(cartToggle);
-  }, [cartToggle]);
-
   const logoutHandler = () => {
-    authCtx.logout();
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("expTime");
+    dispatch(logOut());
+    history.replace("/");
   };
+
+  useEffect(() => {}, [cartToggle]);
 
   return (
     <Fragment>
@@ -52,11 +54,9 @@ const HeaderNavbar = () => {
           <Right>
             <LinkItem to="/shop">SHOP</LinkItem>
             <LinkItem to="/contact">CONTACT</LinkItem>
-            {isLoggedIn ? (
+            {isAuth ? (
               <Fragment>
-                <LinkItem as="div" to="/">
-                  PROFILE
-                </LinkItem>
+                <LinkItem to="/profile">PROFILE</LinkItem>
                 <LinkItem as="div" to="/" onClick={logoutHandler}>
                   LOGOUT
                 </LinkItem>

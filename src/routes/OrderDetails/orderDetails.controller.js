@@ -41,6 +41,45 @@ const getAllOrders = async (req, res, next) => {
   }
 };
 
+const getOrderByUserId = async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id);
+
+    const findOrders = await prisma.orderDetails.findMany({
+      where: { user_id: id },
+      select: {
+        id: true,
+        total: true,
+        createdAt: true,
+        payment_details: {
+          select: {
+            provider: true,
+            status: true,
+          },
+        },
+        order_items: {
+          select: {
+            quantity: true,
+            article: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!findOrders) {
+      throw createError.NotFound("This user has no previous orders.");
+    }
+
+    res.status(200).json(findOrder);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getOrderById = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
@@ -90,6 +129,7 @@ const getOrderById = async (req, res, next) => {
     return;
   }
 };
+
 const deleteOrder = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
@@ -132,4 +172,5 @@ module.exports = {
   getAllOrders,
   getOrderById,
   deleteOrder,
+  getOrderByUserId,
 };

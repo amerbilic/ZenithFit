@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Product from "../Product/product.";
-import { AnimatePresence } from "framer-motion";
 
 const Container = styled.div`
   padding: 20px;
@@ -22,7 +21,6 @@ const Products = () => {
   const directory = useSelector((state) => state.directory.directoryItems);
   return (
     <Fragment>
-      <AnimatePresence exitBeforeEnter>
       <Title>Best Sellers</Title>
       <Container>
         {directory.map((item) => (
@@ -36,7 +34,6 @@ const Products = () => {
           />
         ))}
       </Container>
-      </AnimatePresence>
     </Fragment>
   );
 };

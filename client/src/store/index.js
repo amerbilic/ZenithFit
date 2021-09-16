@@ -12,6 +12,9 @@ import {
 import storage from "redux-persist/lib/storage";
 import directorySlice from "./Directory/directorySlice";
 import articlesSlice from "./Articles/articlesSlice";
+import ordersSlice from "./Orders/ordersSlice";
+import loginReducer from "./Auth/loginSlice";
+import userReducer from "./User/userSlice";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -40,7 +43,7 @@ const cartSlice = createSlice({
           price: parseInt(newItem.price),
           quantity: 1,
         });
-        state.Price += + parseInt(newItem.price);
+        state.Price += +parseInt(newItem.price);
       } else {
         existingItem.quantity++;
         state.Price += existingItem.price;
@@ -63,6 +66,7 @@ const cartSlice = createSlice({
 
 export const cartActions = cartSlice.actions;
 export const articlesActions = articlesSlice.actions;
+export const ordersActions = ordersSlice.actions;
 
 const persistConfig = {
   key: "root",
@@ -77,6 +81,9 @@ const store = configureStore({
     cart: persistedCart,
     directory: directorySlice.reducer,
     articles: articlesSlice.reducer,
+    orders: ordersSlice.reducer,
+    login: loginReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

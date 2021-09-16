@@ -1,17 +1,23 @@
 import "./sign-in.styles.scss";
-import { useState,useContext } from "react";
-import {useHistory} from 'react-router-dom';
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import FormInput from "../Form-input/form-input";
 import Button from "../UI/Button/button";
-import axios from "axios";
-import AuthContext from '../../store/auth-context';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginPending,
+  loginSuccess,
+  loginFail,
+} from "../../store/Auth/loginSlice";
+import { userLogin } from "../../store/Auth/login-actions";
+import { getUserProfile } from "../../store/User/user-actions";
 
 const SignIn = () => {
   const history = useHistory();
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-
-  const authCtx = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.login);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const emailHandler = (event) => {
     setEmail(event.target.value);
@@ -21,21 +27,24 @@ const SignIn = () => {
     setPassword(event.target.value);
   };
 
-
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    dispatch(loginPending());
+
     try {
-      const res = await axios.post("/auth/login", {
-        email: Email,
-        password: Password,
-      });
-      const expirationTime = new Date(new Date().getTime() + 3600000)
-      authCtx.login(res.data.accessToken,expirationTime.toISOString());
-      history.replace('/');
+      const isAuth = await userLogin({ email, password });
+
+      if (isAuth.state === "error") {
+        return dispatch(loginFail(isAuth.message));
+      }
+
+      dispatch(loginSuccess());
+      dispatch(getUserProfile());
+
+      history.replace("/");
     } catch (error) {
-      alert(error.message);
-      console.log(error);
+      dispatch(loginFail(error.message));
     }
 
     setEmail("");
@@ -51,7 +60,7 @@ const SignIn = () => {
           name="email"
           type="email"
           label="Email"
-          value={Email}
+          value={email}
           required
           onChange={emailHandler}
         />
@@ -59,11 +68,12 @@ const SignIn = () => {
           name="password"
           type="password"
           label="Password"
-          value={Password}
+          value={password}
           onChange={passwordHandler}
           required
         />
-        <Button type="submit" >Sign in</Button>
+        <Button type="submit">Sign in</Button>
+        {isLoading && <p>Loading...</p>}
       </form>
     </div>
   );

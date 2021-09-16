@@ -1,11 +1,9 @@
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
-import AuthContext from "../../../store/auth-context";
-import { useContext } from "react";
 
 const StripeCheckoutButton = ({ price, cartItems }) => {
-  const authCtx = useContext(AuthContext);
-  const userId = authCtx.loggedInUserId;
+ // const authCtx = useContext(AuthContext);
+  //const userId = authCtx.loggedInUserId;
   const priceForStripe = price * 100;
   const publishableKey =
     "pk_test_51JUspyLwlYLCgk44mgpftL5N6Cn7Roq0mTImZbkaHUnOF5MEIyGQFYbd3It6ug1jNHqatUjdO1Vr1GDW4zx6VZhH006sBepdLt";
@@ -21,7 +19,7 @@ const StripeCheckoutButton = ({ price, cartItems }) => {
         total: price,
         provider: "stripe",
         status: "succesful",
-        userId,
+      //  userId,
         productList:cartItems
       });
 

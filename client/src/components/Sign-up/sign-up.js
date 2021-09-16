@@ -3,12 +3,10 @@ import Button from "../UI/Button/button";
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import AuthContext from "../../store/auth-context";
 
 import "./sign-up.styles.scss";
 
 const SignUp = (props) => {
-  const authCtx = useContext(AuthContext);
   const history = useHistory();
   const [emailInput, SetEmailInput] = useState("");
   const [passwordInput, SetPasswordInput] = useState("");
@@ -53,8 +51,8 @@ const SignUp = (props) => {
         lastname: "test22",
       });
       const expirationTime = new Date(new Date().getTime() + 3600000);
-      authCtx.login(response.data.accessToken, expirationTime.toISOString(),response.data.userId);
-      alert("Succesfully created an account, you can now login with your credentials!");
+      //authCtx.login(response.data.accessToken, expirationTime.toISOString(),response.data.userId);
+      alert("Succesfully created an account");
       console.log(response.data);
       history.replace("/");
     } catch (error) {

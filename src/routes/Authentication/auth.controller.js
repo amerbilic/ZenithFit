@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 const createError = require("http-errors");
 const client = require("../../helpers/init_redis");
-const prisma = require('../../helpers/prisma');
+const prisma = require("../../helpers/prisma");
 const { authSchema, loginSchema } = require("../../helpers/validation.schema");
 require("dotenv").config();
 
@@ -83,7 +83,7 @@ const signUp = async (req, res, next) => {
       }
     });
 
-    res.json({ accessToken, refreshToken });
+    res.json({ accessToken, refreshToken, userId });
   } catch (err) {
     if (err.isJoi === true) err.status = 422;
     next(err);
@@ -94,8 +94,6 @@ const userLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const result = await loginSchema.validateAsync(req.body);
-
-    console.log("one");
 
     let findUser = await prisma.user.findFirst({
       where: {
@@ -119,8 +117,6 @@ const userLogin = async (req, res, next) => {
     let isMatch = await bcrypt.compare(password, findUser.password);
 
     if (!isMatch) throw createError.Unauthorized("Invalid credentials.");
-
-    console.log("one");
 
     const accessToken = await JWT.sign(
       {
@@ -153,7 +149,7 @@ const userLogin = async (req, res, next) => {
       }
     });
 
-    res.json({ accessToken, refreshToken,userId });
+    res.json({ accessToken, refreshToken, userId });
   } catch (err) {
     next(err);
   }

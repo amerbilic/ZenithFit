@@ -3,7 +3,6 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/index";
-import { Link } from "react-router-dom";
 import { calcRating, getRatings } from "../../helpers/calculateRating";
 import StarRatingDetail from "../UI/Star-Rating-Detail/star-rating-detail";
 

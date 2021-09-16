@@ -23,16 +23,7 @@ const NavDropDown = (props) => {
 
   useOutSideAlert(navitemRef);
   return (
-    <div
-      className="nav-dropdown"
-      onClick={props.toggleOff}
-      onMouseEnter={() => {
-        console.log("OnMouseEnter");
-        props.setIsChildFocused(true);
-      }}
-      onMouseLeave={props.setIsChildFocused(false)}
-      ref={navitemRef}
-    >
+    <div className="nav-dropdown" onClick={props.toggleOff} ref={navitemRef}>
       {props.toggleDropdown &&
         items.map((item, i) => (
           <NavDropDownItem key={i} link={items[i]}>
