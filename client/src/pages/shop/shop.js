@@ -1,10 +1,10 @@
 import React from "react";
-import CollectionsOverview from "../../components/Collections-overview/collections-overview";
+import CollectionsOverview from "../../components/collections-overview/collections-overview";
 import { motion } from "framer-motion";
 import { Route } from "react-router-dom";
-import Collection from "../Collection/collection";
+import Collection from "../collection/collection";
 import Footer from "../../components/UI/Footer/footer";
-import ArticleDetails from "../Article-Details/article-details";
+import ArticleDetails from "../article-details/article-details";
 import { useEffect } from "react";
 import Newsletter from "../../components/UI/Newsletter/newsletter";
 

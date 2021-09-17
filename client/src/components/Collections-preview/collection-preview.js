@@ -1,6 +1,6 @@
 import React from "react";
 import "./collection-preview.styles.scss";
-import Product from "../Product/product.";
+import Product from "../product/product.";
 
 const CollectionPreview = (props) => {
   return (

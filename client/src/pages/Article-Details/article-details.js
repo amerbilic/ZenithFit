@@ -1,5 +1,5 @@
 import "./article-details.styles.scss";
-import ArticleDetail from "../../components/Article-Detail/article-detail";
+import ArticleDetail from "../../components/article-detail/article-detail";
 import { useEffect, Fragment } from "react";
 const ArticleDetails = (props) => {
   useEffect(() => {

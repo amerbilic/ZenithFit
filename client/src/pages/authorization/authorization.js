@@ -1,6 +1,6 @@
 import "./authorization.styles.scss";
-import SignIn from "../../components/Sign-in/sign-in";
-import SignUp from "../../components/Sign-up/sign-up";
+import SignIn from "../../components/sign-in/sign-in";
+import SignUp from "../../components/sign-up/sign-up";
 import { motion } from "framer-motion";
 import Footer from "../../components/UI/Footer/footer";
 import { useEffect } from "react";

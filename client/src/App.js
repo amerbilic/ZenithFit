@@ -3,8 +3,8 @@ import { Fragment, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { loginSuccess, logOut } from "./store/Auth/loginSlice";
-import {getUserSuccess} from './store/User/userSlice';
 import { fetchUser } from "./store/Auth/login-actions";
+import { getUserSuccess } from "./store/User/userSlice";
 import { Route, Switch, useLocation } from "react-router-dom";
 import calculateRemainingTime from "./helpers/calculateRemainingTime";
 import jwt_decode from "jwt-decode";
@@ -26,27 +26,15 @@ import {
   Weight,
   Goals,
 } from "./store/Categories/categories";
-import ProfilePage from "./pages/Profile/Profile";
+import UserProfile from './pages/user-profile/user-profile';
 
 const App = () => {
   const dispatch = useDispatch();
-  const retrieveStoredToken = async () => {
+  const retrieveStoredToken = () => {
     const storedToken = localStorage.getItem("accessToken");
     const storedExpirationDate = localStorage.getItem("expTime");
-    try {
-      if (storedToken) {
-        const user = jwt_decode(storedToken);
-        const uId = user.sub;
-        console.log(uId);
-        const fetchedUser = await fetchUser(uId);
-        dispatch(getUserSuccess(fetchedUser));
-      }
-    } catch (err) {
-      console.log(err);
-    }
 
     const remainingTime = calculateRemainingTime(storedExpirationDate);
-    console.log(remainingTime);
 
     if (remainingTime <= 3600) {
       localStorage.removeItem("accessToken");
@@ -57,13 +45,39 @@ const App = () => {
     return { token: storedToken, expirationTime: remainingTime };
   };
 
+  const fetchUserData = async () => {
+    try {
+      const tokenData = retrieveStoredToken();
+      if (tokenData) {
+        const user = jwt_decode(tokenData.token);
+        const uId = user.sub;
+        const fetchedUser = await fetchUser(uId);
+        dispatch(getUserSuccess(fetchedUser));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      await fetchUserData();
+    };
+    fetchUser();
+  }, []);
+
   useEffect(() => {
     const tokenData = retrieveStoredToken();
-
     if (tokenData) {
+      console.log(tokenData);
       dispatch(loginSuccess());
+      setTimeout(() => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("expTime");
+        dispatch(logOut());
+      }, tokenData.expirationTime);
     }
-  }, []);
+  }, [dispatch]);
 
   const location = useLocation();
   return (
@@ -95,7 +109,7 @@ const App = () => {
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/auth" component={Authorization} />
           <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/profile" component={ProfilePage} />
+          <Route path="/profile" component={UserProfile} />
         </Switch>
       </AnimatePresence>
     </Fragment>

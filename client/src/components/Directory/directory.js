@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import DirectoryItem from "../DirectoryItem/directoryItem";
+import DirectoryItem from "../directory-item/directoryItem";
 import { useSelector } from "react-redux";
 
 const Container = styled.div`

@@ -1,7 +1,7 @@
 import "./checkout.styles.scss";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import CheckoutItem from "../../components/Checkout-Item/checkout-item";
+import CheckoutItem from "../../components/checkout-item/checkout-item";
 import StripeCheckoutButton from "../../components/UI/Stripe-Button/stripe-button";
 import Footer from "../../components/UI/Footer/footer";
 import { useEffect } from "react";

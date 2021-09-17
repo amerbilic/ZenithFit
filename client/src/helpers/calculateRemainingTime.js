@@ -1,6 +1,7 @@
-const calculateRemainingTime = (expirationTime) => {
+const calculateRemainingTime = (expTimeMiliseconds) => {
   const currentTime = new Date().getTime();
-  const adjExpirationTime = new Date(expirationTime*1000).getTime();
+  const expTime = expTimeMiliseconds * 1000;
+  const adjExpirationTime = new Date(expTime).getTime();
   const remainingTime = adjExpirationTime - currentTime;
   return remainingTime;
 };

@@ -1,7 +1,7 @@
 import "./sign-in.styles.scss";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import FormInput from "../Form-input/form-input";
+import FormInput from "../form-input/form-input";
 import Button from "../UI/Button/button";
 import { useDispatch, useSelector } from "react-redux";
 import {

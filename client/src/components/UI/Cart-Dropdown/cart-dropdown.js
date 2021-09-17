@@ -1,6 +1,6 @@
 import "./cart-dropdown.styles.scss";
 import Button from "../Button/button";
-import CartItem from "../../Cart-Item/cart-item";
+import CartItem from "../../cart-item/cart-item";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { cartActions } from "../../../store/index";

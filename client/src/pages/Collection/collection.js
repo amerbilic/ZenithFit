@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { fetchCollectionData } from "../../store/Articles/articles-actions";
-import Product from "../../components/Product/product.";
+import Product from "../../components/product/product.";
 
 const Collection = (props) => {
   const isLoading = useSelector((state) => state.articles.isLoading);

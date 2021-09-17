@@ -1,11 +1,11 @@
 import React from "react";
-import Directory from "../../components/Directory/directory";
+import Directory from "../../components/directory/directory";
 import Hero from "../../components/UI/Hero/hero";
 import { motion } from "framer-motion";
 import Footer from "../../components/UI/Footer/footer";
 import { useEffect } from "react";
 import Newsletter from "../../components/UI/Newsletter/newsletter";
-import Products from "../../components/Products/Products";
+import Products from "../../components/products/Products";
 
 const HomePage = () => {
   useEffect(() => {

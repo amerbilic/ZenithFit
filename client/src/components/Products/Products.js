@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import Product from "../Product/product.";
+import Product from "../product/product.";
 
 const Container = styled.div`
   padding: 20px;

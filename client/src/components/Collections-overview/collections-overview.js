@@ -1,5 +1,5 @@
 import "./collections-overview.styles.scss";
-import CollectionPreview from "../Collections-preview/collection-preview";
+import CollectionPreview from "../collections-preview/collection-preview";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArticlesData } from "../../store/Articles/articles-actions";

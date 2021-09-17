@@ -3,8 +3,11 @@ const createError = require("http-errors");
 
 const processOrder = async (req, res, next) => {
   const { provider, status, userId, total, productList } = req.body;
+  console.log(req.body);
   try {
     if (!provider || !status || !userId || !total || !productList) {
+      throw createError.BadRequest("Missing required parameters.");
+    } else {
       const { id } = await prisma.paymentDetails.create({
         data: {
           amount: total,
@@ -26,7 +29,7 @@ const processOrder = async (req, res, next) => {
           data: {
             quantity: element.quantity,
             order_id: newOrder.id,
-            article_id: element.id,
+            article_id: element.article_id,
           },
         });
       });

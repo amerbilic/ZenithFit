@@ -63,6 +63,8 @@ const getOrderByUserId = async (req, res, next) => {
             article: {
               select: {
                 name: true,
+                img:true,
+                id:true,
               },
             },
           },
@@ -74,7 +76,7 @@ const getOrderByUserId = async (req, res, next) => {
       throw createError.NotFound("This user has no previous orders.");
     }
 
-    res.status(200).json(findOrder);
+    res.status(200).json(findOrders);
   } catch (err) {
     next(err);
   }
@@ -112,6 +114,7 @@ const getOrderById = async (req, res, next) => {
             article: {
               select: {
                 name: true,
+                img: true,
               },
             },
           },

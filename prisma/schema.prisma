@@ -23,7 +23,7 @@ model User {
   addresses Address[]
   payments UserPayment[]
   shopping_session ShoppingSession?
-  order_details OrderDetails?
+  order_details OrderDetails[]
   rating UserRating[]
 }
 
@@ -99,7 +99,7 @@ model Article {
   discount Discount? @relation(fields:[discount_id],references:[id])
   discount_id Int?
   cart_item CartItem?
-  order_items OrderItems?
+  order_items OrderItems[]
   rating UserRating[]
 }
 
