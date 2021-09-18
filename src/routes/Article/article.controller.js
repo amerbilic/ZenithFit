@@ -1,4 +1,4 @@
-const prisma = require('../../helpers/prisma');
+const prisma = require("../../helpers/prisma");
 const createError = require("http-errors");
 
 const getAllArticles = async (req, res, next) => {
@@ -29,6 +29,8 @@ const getAllArticles = async (req, res, next) => {
 const getArticleById = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
+
+    if (!id) throw createError.BadRequest("Please provide an id parameter");
 
     const searchArticle = await prisma.article.findFirst({
       where: {
@@ -125,9 +127,38 @@ const createArticle = async (req, res, next) => {
   }
 };
 
+const getBestSellers = async (req, res, next) => {
+  try {
+    const bestSellersCount = await prisma.article.findMany({
+      take: 4,
+      select: {
+        id: true,
+        name: true,
+        img: true,
+        price: true,
+        rating: {
+          select: {
+            rating: true,
+          },
+        },
+      },
+      orderBy: {
+        order_items: {
+          _count: "desc",
+        },
+      },
+    });
+
+    res.status(200).json(bestSellersCount);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAllArticles,
   getArticleById,
   deleteArticle,
   createArticle,
+  getBestSellers,
 };

@@ -50,7 +50,7 @@ const SignUp = (props) => {
         firstname: "test12",
         lastname: "test22",
       });
-      const expirationTime = new Date(new Date().getTime() + 3600000);
+      //const expirationTime = new Date(new Date().getTime() + 3600000);
       //authCtx.login(response.data.accessToken, expirationTime.toISOString(),response.data.userId);
       alert("Succesfully created an account");
       console.log(response.data);

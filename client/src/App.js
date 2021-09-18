@@ -26,7 +26,8 @@ import {
   Weight,
   Goals,
 } from "./store/Categories/categories";
-import UserProfile from './pages/user-profile/user-profile';
+import UserProfile from "./pages/user-profile/user-profile";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -69,7 +70,6 @@ const App = () => {
   useEffect(() => {
     const tokenData = retrieveStoredToken();
     if (tokenData) {
-      console.log(tokenData);
       dispatch(loginSuccess());
       setTimeout(() => {
         localStorage.removeItem("accessToken");
@@ -82,6 +82,17 @@ const App = () => {
   const location = useLocation();
   return (
     <Fragment>
+      <Toaster
+        toastOptions={{
+          success: {
+            style: {
+              background:
+                "linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%)",
+              color: "white",
+            },
+          },
+        }}
+      />
       <div className="sticky">
         <HeaderNavbar />
         <Navbar>

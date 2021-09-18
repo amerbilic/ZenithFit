@@ -7,6 +7,7 @@ const articlesSlice = createSlice({
     listItems: [],
     collectionItems: [],
     detailItem: [],
+    bestSellers:[],
     rating: 0,
     isLoading: true,
   },
@@ -27,6 +28,9 @@ const articlesSlice = createSlice({
     toggleIsLoading(state,action) {
       state.isLoading = action.payload;
     },
+    replaceBestSellers(state,action){
+      state.bestSellers = action.payload;
+    }
   },
 });
 

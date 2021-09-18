@@ -4,7 +4,6 @@ import {
   Home,
   ListAlt,
   LocationOn,
-  Lock,
   Payment,
 } from "@material-ui/icons";
 import {
@@ -47,29 +46,23 @@ const ProfileNavigation = () => {
       <Line style={{ width: "80%" }} />
       <TitleLeft>Account Settings</TitleLeft>
       <OptionList>
-        <NavLink to="/profile">
+        <NavLink to="/profile/account">
           <Icon>
             <AccountBox />
           </Icon>
           Account Details
         </NavLink>
-        <NavLink to="/profile">
+        <NavLink to="/profile/addresses">
           <Icon>
             <LocationOn />
           </Icon>
           Addresses
         </NavLink>
-        <NavLink to="/profile">
+        <NavLink to="/profile/cards">
           <Icon>
             <Payment />
           </Icon>
           Payment Cards
-        </NavLink>
-        <NavLink to="/profile">
-          <Icon>
-            <Lock />
-          </Icon>
-          Change password
         </NavLink>
       </OptionList>
       <Line style={{ width: "80%" }} />

@@ -5,6 +5,7 @@ import Orders from "../orders/orders";
 import { useEffect } from "react";
 import Newsletter from "../../components/UI/Newsletter/newsletter";
 import Profile from "../profile/profile";
+import UserAccountDetails from "../user-account-details/user-account-details";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrdersData } from "../../store/Orders/orders-actions";
 
@@ -19,7 +20,7 @@ const UserProfile = (props) => {
       behavior: "smooth",
     });
     if (loggedInUser.username) dispatch(fetchOrdersData(loggedInUser.id));
-  }, [loggedInUser, dispatch]);
+  }, []);
 
   return (
     <motion.div
@@ -33,6 +34,9 @@ const UserProfile = (props) => {
       </Route>
       <Route exact path={`${props.match.path}/orders`}>
         <Orders orders={orderList} />
+      </Route>
+      <Route exact path={`${props.match.path}/account`}>
+        <UserAccountDetails />
       </Route>
       <Newsletter />
       <Footer />

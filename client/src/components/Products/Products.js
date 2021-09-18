@@ -1,7 +1,8 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Product from "../product/product.";
+import { fetchBestSellers } from "../../store/Articles/articles-actions";
 
 const Container = styled.div`
   padding: 20px;
@@ -18,21 +19,31 @@ const Title = styled.h1`
 `;
 
 const Products = () => {
-  const directory = useSelector((state) => state.directory.directoryItems);
+  const dispatch = useDispatch();
+  const bestSellers = useSelector((state) => state.articles.bestSellers);
+
+  useEffect(() => {
+    dispatch(fetchBestSellers());
+  }, []);
+
   return (
     <Fragment>
       <Title>Best Sellers</Title>
       <Container>
-        {directory.map((item) => (
-          <Product
-            key={item.id}
-            id={item.id}
-            name={item.title}
-            price={item.price}
-            img={item.imageUrl}
-            rating={[4, 3]}
-          />
-        ))}
+        {bestSellers.length > 1 ? (
+          bestSellers.map((item) => (
+            <Product
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              price={item.price}
+              img={item.img}
+              rating={item.rating}
+            />
+          ))
+        ) : (
+          <div>loading...</div>
+        )}
       </Container>
     </Fragment>
   );

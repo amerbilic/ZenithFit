@@ -43,6 +43,9 @@ export const OrderItem = styled.div`
   justify-content: flex-start;
   width: 100%;
   align-items: center;
+  margin-bottom: 10px;
+  margin-left:25px;
+  margin-top:5px;
 `;
 
 export const Image = styled.img`

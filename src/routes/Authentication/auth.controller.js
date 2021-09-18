@@ -106,8 +106,6 @@ const userLogin = async (req, res, next) => {
       },
     });
 
-    console.log(findUser);
-
     if (!findUser || findUser === null)
       throw createError.NotFound("User not found.");
 

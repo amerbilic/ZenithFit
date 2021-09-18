@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/index";
 import { calcRating, getRatings } from "../../helpers/calculateRating";
 import StarRatingDetail from "../UI/Star-Rating-Detail/star-rating-detail";
+import { useLocation, useHistory } from "react-router-dom";
 
 const Info = styled.div`
   opacity: 0;
@@ -65,7 +66,7 @@ const Icon = styled.div`
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: #5DFDCB;
+    background-color: #5dfdcb;
     transform: scale(1.1);
   }
 `;
@@ -109,6 +110,8 @@ const CollectionStar = styled.div`
 
 const Product = (props) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
   const ratingScores = props.rating.map(getRatings);
   const totalRating = ratingScores.reduce(calcRating, 0);
   const averageRating = totalRating / ratingScores.length;
@@ -123,6 +126,10 @@ const Product = (props) => {
     );
   };
 
+  const searchClickHandler = () => {
+    history.push(`${location.pathname}/${props.id}`);
+  };
+
   return (
     <Fragment>
       <MainContainer>
@@ -134,7 +141,7 @@ const Product = (props) => {
               <ShoppingCartOutlined onClick={addItemHandler} />
             </Icon>
             <Icon>
-              <SearchOutlined />
+              <SearchOutlined onClick={searchClickHandler} />
             </Icon>
           </Info>
         </Container>

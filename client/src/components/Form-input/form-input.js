@@ -4,13 +4,13 @@ const FormInput = (props) => {
   return (
     <div className="group">
       <input className="form-input" {...props} />
-        {props.label ? (
-          <label
-            className={`${props.value.length ? "shrink" : ""} form-input-label`}
-          >
-            {props.label}
-          </label>
-        ) : null}
+      {props.label ? (
+        <label
+          className={`${props.value ? "shrink" : ""} form-input-label`}
+        >
+          {props.label}
+        </label>
+      ) : null}
     </div>
   );
 };

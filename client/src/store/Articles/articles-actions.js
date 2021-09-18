@@ -40,7 +40,7 @@ export const fetchCollectionData = (name) => {
 export const fetchDetailData = (name) => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await axios.get(`/articles/${name}`);
+      const response = await axios.get(`/articles/article/${name}`);
       const data = response.data;
       return data;
     };
@@ -54,3 +54,21 @@ export const fetchDetailData = (name) => {
     }
   };
 };
+
+export const fetchBestSellers = () => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      const response = await axios.get(`/articles/bestsellers`);
+      const data = response.data;
+      return data;
+    };
+
+    try {
+      const articlesData = await fetchData();
+      dispatch(articlesActions.replaceBestSellers(articlesData));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+};
+

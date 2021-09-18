@@ -1,5 +1,3 @@
-import Footer from "../../components/UI/Footer/footer";
-import Newsletter from "../../components/UI/Newsletter/newsletter";
 import { Fragment, useEffect } from "react";
 import ProfileNavigation from "../../components/profile-navigation/profile-navigation";
 import {
@@ -15,6 +13,7 @@ import {
   RecentOrderTitle,
   RecentOrderWrapper,
   Image,
+  HorRule,
 } from "./profile.styles";
 
 const Profile = ({ user, orders }) => {
@@ -42,23 +41,22 @@ const Profile = ({ user, orders }) => {
               {orders
                 .filter((item, idx) => idx < 3)
                 .map((item) => (
-                  <RecentOrderWrapper key={item.id}>
-                    <RecentOrderTitle>
-                      Order No.1212313
-                    </RecentOrderTitle>
+                  <Fragment key={item.id}>
+                  <RecentOrderWrapper >
+                    <RecentOrderTitle>Order No.00000{item.id}</RecentOrderTitle>
                     {item.order_items
                       .filter((item, idx) => idx < 3)
                       .map((item) => (
                         <Image key={item.article.id} src={item.article.img} />
                       ))}
                   </RecentOrderWrapper>
+                  <HorRule/>
+                  </Fragment>
                 ))}
             </RecentOrderList>
           </RecentOrders>
         </Right>
       </Container>
-      <Newsletter />
-      <Footer />
     </Fragment>
   );
 };

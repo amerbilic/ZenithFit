@@ -11,6 +11,7 @@ import {
 } from "../../store/Auth/loginSlice";
 import { userLogin } from "../../store/Auth/login-actions";
 import { getUserProfile } from "../../store/User/user-actions";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
   const history = useHistory();
@@ -27,6 +28,8 @@ const SignIn = () => {
     setPassword(event.target.value);
   };
 
+  const notify = () => toast.success("Successfully logged in.");
+
   const submitHandler = async (event) => {
     event.preventDefault();
 
@@ -41,8 +44,9 @@ const SignIn = () => {
 
       dispatch(loginSuccess());
       dispatch(getUserProfile());
+      notify();
 
-      history.replace("/");
+     history.replace("/")
     } catch (error) {
       dispatch(loginFail(error.message));
     }

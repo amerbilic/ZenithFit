@@ -50,11 +50,12 @@ export const RecentOrders = styled.div`
   display: flex;
   flex-direction: column;
   height: 67.6%;
+  align-items: center;
 `;
 
 export const RecentOrderList = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   flex-direction: column;
 `;
 export const RecentOrderWrapper = styled.div`
@@ -63,6 +64,8 @@ export const RecentOrderWrapper = styled.div`
   width: 100%;
   align-items: center;
   margin-bottom: 15px;
+  margin-left:25px;
+  margin-top:5px;
 `;
 
 export const RecentOrderTitle = styled.div`
@@ -75,7 +78,12 @@ export const RecentOrderTitle = styled.div`
 
 export const Image = styled.img`
   object-fit: cover;
-  height: 100%;
-  width: 20%;
+  height: 90%;
+  width: 15%;
   margin-right: 10px;
+`;
+
+export const HorRule = styled.hr`
+  width: 90%;
+  margin:5px auto;
 `;

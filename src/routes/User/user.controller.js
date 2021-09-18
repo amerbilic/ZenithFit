@@ -1,5 +1,6 @@
-const  prisma  = require("../../helpers/prisma");
+const prisma = require("../../helpers/prisma");
 const createError = require("http-errors");
+const bcrypt = require("bcrypt");
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -38,7 +39,7 @@ const getUser = async (req, res, next) => {
         status: true,
         addresses: true,
         payments: true,
-        id:true
+        id: true,
       },
     });
 
@@ -79,16 +80,27 @@ const deleteUser = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
-    const { username, firstname, lastname, telephone } = req.body;
+    const { username, firstname, lastname, password, newPassword } = req.body;
 
-    const getUsers = await prisma.user.findFirst({
+    let hashedPassword;
+    const getUser = await prisma.user.findFirst({
       where: {
         id,
       },
     });
 
-    if (!getUsers)
+    if (!getUser)
       throw createError.NotFound("User with this Id does not exist.");
+
+    if (password) {
+      let isMatch = await bcrypt.compare(password, getUser.password);
+
+      if (!isMatch)
+        throw createError.Unauthorized(
+          "You have provided an incorrect password."
+        );
+      hashedPassword = await bcrypt.hash(newPassword, 10);
+    }
 
     const updatedUser = await prisma.user.update({
       where: {
@@ -98,9 +110,10 @@ const updateUser = async (req, res, next) => {
         username,
         firstname,
         lastname,
-        telephone,
+        password: hashedPassword,
       },
       select: {
+        id: true,
         username: true,
         firstname: true,
         lastname: true,
