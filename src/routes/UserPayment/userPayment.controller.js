@@ -1,4 +1,4 @@
-const  prisma  = require("../../helpers/prisma");
+const prisma = require("../../helpers/prisma");
 const createError = require("http-errors");
 
 const getAllUserPayments = async (req, res, next) => {
@@ -50,6 +50,14 @@ const getUserPaymentByUserId = async (req, res, next) => {
   const id = parseInt(req.params.id);
 
   try {
+    const checkUser = await prisma.user.findFirst({
+      where: { id },
+    });
+
+    if (!checkUser) {
+      throw createError.NotFound("This user does not exist in the database.");
+    }
+
     const findPayment = await prisma.userPayment.findFirst({
       where: {
         user_id: id,
@@ -63,9 +71,6 @@ const getUserPaymentByUserId = async (req, res, next) => {
         expiry: true,
       },
     });
-    if (!findPayment) {
-      throw createError.NotFound("User payment by this Id was not found.");
-    }
 
     res.status(200).json(findPayment);
   } catch (err) {

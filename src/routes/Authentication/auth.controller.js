@@ -53,10 +53,12 @@ const signUp = async (req, res, next) => {
     });
 
     const userId = savedUser.id;
+    const userStatus = savedUser.status;
 
     const accessToken = await JWT.sign(
       {
         sub: userId,
+        userStatus,
       },
       process.env.JWT_SECRET,
       {

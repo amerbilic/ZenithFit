@@ -28,7 +28,7 @@ const SignIn = () => {
     setPassword(event.target.value);
   };
 
-  const notify = () => toast.success("Successfully logged in.");
+  const notify = (message) => toast.error(message);
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -39,15 +39,16 @@ const SignIn = () => {
       const isAuth = await userLogin({ email, password });
 
       if (isAuth.state === "error") {
+        notify("Invalid login credentials.");
         return dispatch(loginFail(isAuth.message));
       }
 
       dispatch(loginSuccess());
       dispatch(getUserProfile());
-      notify();
 
-     history.replace("/")
+      history.replace("/");
     } catch (error) {
+      notify("Invalid login credentials.");
       dispatch(loginFail(error.message));
     }
 

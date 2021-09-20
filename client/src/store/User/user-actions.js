@@ -19,7 +19,7 @@ export const updateUser = (props) => {
   return async (dispatch) => {
     const updateData = async () => {
       let response;
-      console.log(props.firstName);
+
       if (!props.password) {
         response = await axios.put(`/users/${props.id}`, {
           firstname: props.firstName,

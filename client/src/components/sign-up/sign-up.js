@@ -2,12 +2,22 @@ import FormInput from "../form-input/form-input";
 import Button from "../UI/Button/button";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginPending,
+  loginSuccess,
+  loginFail,
+} from "../../store/Auth/loginSlice";
+import { userRegister } from "../../store/Auth/login-actions";
+import { getUserProfile } from "../../store/User/user-actions";
+import toast from "react-hot-toast";
 
 import "./sign-up.styles.scss";
 
 const SignUp = (props) => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.login);
   const [emailInput, SetEmailInput] = useState("");
   const [passwordInput, SetPasswordInput] = useState("");
   const [usernameInput, SetUsernameInput] = useState("");
@@ -29,9 +39,12 @@ const SignUp = (props) => {
     setConfirmPasswordInput(event.target.value);
   };
 
+  const notify = (message) => toast.error(message);
+
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    dispatch(loginPending());
     const enteredEmail = emailInput;
     const enteredPassword = passwordInput;
     const enteredUsername = usernameInput;
@@ -43,21 +56,21 @@ const SignUp = (props) => {
     }
 
     try {
-      const response = await axios.post("/auth/signup", {
+      await userRegister({
         email: enteredEmail,
         password: enteredPassword,
         username: enteredUsername,
         firstname: "test12",
         lastname: "test22",
       });
-      //const expirationTime = new Date(new Date().getTime() + 3600000);
-      //authCtx.login(response.data.accessToken, expirationTime.toISOString(),response.data.userId);
-      alert("Succesfully created an account");
-      console.log(response.data);
+
+      dispatch(loginSuccess());
+      dispatch(getUserProfile());
+
       history.replace("/");
     } catch (error) {
-      alert(error);
-      console.log(error.message);
+      dispatch(loginFail(error.error.message));
+      toast.error(error.error.message);
     }
   };
 
@@ -99,6 +112,7 @@ const SignUp = (props) => {
           required
         />
         <Button type="submit">Sign up</Button>
+        {isLoading && <p>Loading...</p>}
       </form>
     </div>
   );

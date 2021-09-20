@@ -8,6 +8,8 @@ import Profile from "../profile/profile";
 import UserAccountDetails from "../user-account-details/user-account-details";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrdersData } from "../../store/Orders/orders-actions";
+import Addresses from "../addresses/addresses";
+import PaymentCards from "../payment-cards/payment-cards";
 
 const UserProfile = (props) => {
   const dispatch = useDispatch();
@@ -37,6 +39,12 @@ const UserProfile = (props) => {
       </Route>
       <Route exact path={`${props.match.path}/account`}>
         <UserAccountDetails />
+      </Route>
+      <Route exact path={`${props.match.path}/addresses`}>
+        <Addresses />
+      </Route>
+      <Route exact path={`${props.match.path}/cards`}>
+        <PaymentCards />
       </Route>
       <Newsletter />
       <Footer />

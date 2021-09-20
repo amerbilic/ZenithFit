@@ -1,4 +1,4 @@
-const prisma = require('../../helpers/prisma');
+const prisma = require("../../helpers/prisma");
 const createError = require("http-errors");
 
 const getAllAddresses = async (req, res, next) => {
@@ -12,6 +12,35 @@ const getAllAddresses = async (req, res, next) => {
       },
     });
     res.status(200).json(allAddresses);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getAddressesbyUserId = async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id);
+
+    const checkUser = await prisma.user.findFirst({
+      where:{id}
+    })
+    
+    if (!checkUser) { throw createError.NotFound('This user does not exist in the database.')};
+
+    const addressList = await prisma.address.findMany({
+      where:{
+        userId: id,
+      },
+      select:{
+        addressLine:true,
+        city:true,
+        postalCode:true,
+        country:true,
+      }
+    });
+
+    res.status(200).json(addressList);
+
   } catch (err) {
     next(err);
   }
@@ -49,7 +78,7 @@ const addAddress = async (req, res, next) => {
     if (!addressLine || !city || !postalCode || !country) {
       throw createError.BadRequest("Please provide all required fields.");
     }
-    
+
     const searchAddress = await prisma.address.findFirst({
       where: {
         addressLine,
@@ -108,4 +137,5 @@ module.exports = {
   getAddressById,
   addAddress,
   deleteAddress,
+  getAddressesbyUserId
 };
