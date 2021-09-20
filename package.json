@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "nodemon src/server.js",
     "start": "node src/server.js",
-    "migrate": "npx prisma generate",
+    "migrate": "npx prisma migrate deploy",
     "heroku-postbuild": "npm run migrate && cd client && npm install && npm run build "
   },
   "keywords": [],
