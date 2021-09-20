@@ -12,7 +12,7 @@
     "watch": "nodemon src/server.js",
     "start": "node src/server.js",
     "migrate": "npx prisma migrate dev --name init",
-    "heroku-postbuild": "cd client && npm install && npm run build && npm run migrate"
+    "heroku-postbuild": "npm run migrate && cd client && npm install && npm run build "
   },
   "keywords": [],
   "author": "",
