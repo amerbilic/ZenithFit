@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-import faker from "faker";
-
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const faker = require("faker");
 
 async function main() {
   await prisma.articleCategory.create({
