@@ -12,8 +12,8 @@
     "watch": "nodemon src/server.js",
     "start": "node src/server.js",
     "migrate": "npx prisma migrate deploy",
-    "seed": "cd prisma && node seed.js",
-    "heroku-postbuild": "npm run migrate && cd client && npm install && npm run build "
+    "seed": "cd src && cd prisma && node seed.js",
+    "heroku-postbuild": "npm run migrate && npm run seed && cd.. && cd.. && cd client && npm install && npm run build "
   },
   "keywords": [],
   "author": "",
