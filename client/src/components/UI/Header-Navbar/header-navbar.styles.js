@@ -10,27 +10,35 @@ const ItemContainerStyles = css`
   transition: all 0.3s ease-out;
 
   &:hover {
-    color: #5DFDCB;
+    color: #5dfdcb;
     transition: all 0.3s ease-out;
   }
 `;
 
 const LinkLogoStyles = css`
   font-size: 2em;
-  color:white;
+  color: white;
   font-weight: bold;
   transition: all 0.3s ease-out;
 
   &:hover {
-    color: #5DFDCB;
+    color: #5dfdcb;
     transition: all 0.3s ease-out;
   }
+
+  ${mobile({
+    fontSize: "14px",
+    display: "flex",
+  })}
 `;
 
 export const Container = styled.div`
   height: 65px;
   background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
   color: white;
+  ${mobile({
+    height: "60px",
+  })}
 `;
 
 export const Wrapper = styled.div`
@@ -39,7 +47,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   ${mobile({
-    padding: "10px 0px",
+    padding: "10px 10px",
   })}
 `;
 
@@ -53,7 +61,7 @@ export const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
   ${mobile({
-    display: "none",
+    display:"none"
   })}
 `;
 
@@ -63,6 +71,9 @@ export const SearchContainer = styled.div`
   align-items: center;
   margin-left: 25px;
   padding: 5px;
+  ${mobile({
+    display:"none"
+  })}
 `;
 
 export const Input = styled.input`
@@ -88,6 +99,9 @@ export const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  ${mobile({
+    justifyContent: "center",
+  })}
 `;
 
 export const MenuItem = styled.div`

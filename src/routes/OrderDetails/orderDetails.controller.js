@@ -27,6 +27,15 @@ const getAllOrders = async (req, res, next) => {
             article: {
               select: {
                 name: true,
+                price: true,
+                img: true,
+                rating: {
+                  select: {
+                    rating: true,
+                    user_id:true,
+                    id:true,
+                  },
+                },
               },
             },
           },
@@ -63,8 +72,16 @@ const getOrderByUserId = async (req, res, next) => {
             article: {
               select: {
                 name: true,
-                img:true,
-                id:true,
+                img: true,
+                id: true,
+                price: true,
+                rating: {
+                  select: {
+                    rating: true,
+                    user_id:true,
+                    id:true,
+                  },
+                },
               },
             },
           },
@@ -115,6 +132,14 @@ const getOrderById = async (req, res, next) => {
               select: {
                 name: true,
                 img: true,
+                price: true,
+                rating: {
+                  select: {
+                    rating: true,
+                    user_id:true,
+                    id:true,
+                  },
+                },
               },
             },
           },

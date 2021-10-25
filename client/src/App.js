@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess, logOut } from "./store/Auth/loginSlice";
 import { fetchUser } from "./store/Auth/login-actions";
 import { getUserSuccess } from "./store/User/userSlice";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation, Link } from "react-router-dom";
 import calculateRemainingTime from "./helpers/calculateRemainingTime";
 import jwt_decode from "jwt-decode";
 
@@ -24,10 +24,11 @@ import {
   Performance,
   Vitamins,
   Weight,
-  Goals,
 } from "./store/Categories/categories";
 import UserProfile from "./pages/user-profile/user-profile";
 import { Toaster } from "react-hot-toast";
+import DirectoryShopPage from "./pages/directory-shop/directory-shop";
+import GoalsPage from "./pages/goals-page/GoalsPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -108,9 +109,7 @@ const App = () => {
           <Navitem name="Weight">
             <NavDropDown categories={Weight} />
           </Navitem>
-          <Navitem name="Goal Selector">
-            <NavDropDown categories={Goals} />
-          </Navitem>
+          <Link className='GoalSelector' to="/goals">Goal Selector</Link>
         </Navbar>
       </div>
       <Announcement />
@@ -121,6 +120,8 @@ const App = () => {
           <Route exact path="/auth" component={Authorization} />
           <Route exact path="/checkout" component={Checkout} />
           <Route path="/profile" component={UserProfile} />
+          <Route path="/directory" component={DirectoryShopPage} />
+          <Route path="/goals" component={GoalsPage} />
         </Switch>
       </AnimatePresence>
     </Fragment>

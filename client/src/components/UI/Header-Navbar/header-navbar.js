@@ -53,7 +53,6 @@ const HeaderNavbar = () => {
           </Center>
           <Right>
             <LinkItem to="/shop">SHOP</LinkItem>
-            <LinkItem to="/contact">CONTACT</LinkItem>
             {isAuth ? (
               <Fragment>
                 <LinkItem to="/profile">PROFILE</LinkItem>

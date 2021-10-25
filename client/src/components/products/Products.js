@@ -24,7 +24,7 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(fetchBestSellers());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Fragment>

@@ -3,7 +3,6 @@ const morgan = require("morgan");
 const createError = require("http-errors");
 const cors = require("cors");
 const path = require("path");
-require("./helpers/init_redis");
 
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
@@ -21,7 +20,7 @@ const paymentdetailsRouter = require("./routes/PaymentDetails/paymentDetails.rou
 const shoppingSessionRouter = require("./routes/ShoppingSession/shoppingSession.router");
 const userRouter = require("./routes/User/user.router");
 const userPaymentRouter = require("./routes/UserPayment/userPayment.router");
-const userreviewsRouter = require("./routes/UserReviews/userreviews.router");
+const userRatingRouter = require("./routes/UserRating/userRating.router");
 const finalizeOrderRouter = require("./routes/FinalizeOrder/finalizeOrder.router");
 
 const app = express();
@@ -42,7 +41,7 @@ app.use("/paymentdetails", paymentdetailsRouter);
 app.use("/shoppingsession", shoppingSessionRouter);
 app.use("/users", userRouter);
 app.use("/userpayment", userPaymentRouter);
-//app.use("/userreviews", userreviewsRouter); // TODO
+app.use("/rating", userRatingRouter);
 
 app.post("/payment", (req, res, next) => {
   const body = {

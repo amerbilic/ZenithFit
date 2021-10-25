@@ -12,7 +12,7 @@ const ArticleDetail = (props) => {
 
   useEffect(() => {
     dispatch(fetchDetailData(props.id));
-  }, [dispatch, props.id]);
+  }, [dispatch,props.id]);
 
   return (
     <div className="details">
@@ -23,11 +23,11 @@ const ArticleDetail = (props) => {
         <div className="row">
           <h2>{item.name}</h2>
         </div>
-        <StarRatingDetail size={30} rating={rating}/>
+        <StarRatingDetail size={30} rating={rating} />
         <p>{`${item.desc}`}</p>
-        <hr aria-hidden="true" className='ProductPage_hr'></hr>
-        <span className='ProductPage_price'>${item.price}</span>
-        <hr aria-hidden="true" className='ProductPage_hr'></hr>
+        <hr aria-hidden="true" className="ProductPage_hr"></hr>
+        <span className="ProductPage_price">${item.price}</span>
+        <hr aria-hidden="true" className="ProductPage_hr"></hr>
         <Button className="cartB">Add to cart</Button>
       </div>
     </div>

@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 const createError = require("http-errors");
-const client = require("../../helpers/init_redis");
 const prisma = require("../../helpers/prisma");
 const { authSchema, loginSchema } = require("../../helpers/validation.schema");
 require("dotenv").config();
@@ -78,13 +77,6 @@ const signUp = async (req, res, next) => {
       }
     );
 
-    client.SET(userId, refreshToken, "EX", 365 * 24 * 60 * 60, (err, reply) => {
-      if (err) {
-        console.log(err.message);
-        throw createError.InternalServerError();
-      }
-    });
-
     res.json({ accessToken, refreshToken, userId });
   } catch (err) {
     if (err.isJoi === true) err.status = 422;
@@ -141,13 +133,6 @@ const userLogin = async (req, res, next) => {
         issuer: "zenithFit.com",
       }
     );
-
-    client.SET(userId, refreshToken, "EX", 365 * 24 * 60 * 60, (err, reply) => {
-      if (err) {
-        console.log(err.message);
-        throw createError.InternalServerError();
-      }
-    });
 
     res.json({ accessToken, refreshToken, userId });
   } catch (err) {
@@ -206,14 +191,6 @@ const logOut = async (req, res, next) => {
       refreshToken,
       process.env.REFRESH_TOKEN_SECRET
     );
-    client.DEL(sub, (err, val) => {
-      if (err) {
-        console.log(err.message);
-        throw createError.InternalServerError();
-      }
-      console.log(val);
-      res.sendStatus(204);
-    });
   } catch (err) {
     next(err);
   }

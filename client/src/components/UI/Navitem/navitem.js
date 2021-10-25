@@ -13,11 +13,14 @@ const Navitem = (props) => {
       <div
         className="nav-item-button disable-select"
         onClick={() => {
-          setToggleDropdown(!toggleDropdown);
+          if (props.children) {
+            setToggleDropdown(!toggleDropdown);
+          }
         }}
       >
         {props.name}
       </div>
+
       {toggleDropdown &&
         React.cloneElement(props.children, {
           toggleOff,

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { mobile } from "../../responsive";
 
 export const Line = styled.hr`
   display: flex;
@@ -52,6 +53,7 @@ export const LogoutLink = styled(Link)`
   &:hover {
     cursor: pointer;
     background: var(--bg-highlight);
+    transition: all 0.3s ease;
   }
 `;
 
@@ -66,5 +68,6 @@ export const NavLink = styled(Link)`
   &:hover {
     cursor: pointer;
     background: var(--bg-highlight);
+    transition: all 0.5s ease;
   }
 `;

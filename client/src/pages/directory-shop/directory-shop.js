@@ -1,14 +1,12 @@
 import React from "react";
-import CollectionsOverview from "../../components/collections-overview/collections-overview";
 import { motion } from "framer-motion";
 import { Route } from "react-router-dom";
-import Collection from "../collection/collection";
 import Footer from "../../components/UI/Footer/footer";
-import ArticleDetails from "../article-details/article-details";
 import { useEffect } from "react";
 import Newsletter from "../../components/UI/Newsletter/newsletter";
+import DirectoryShopList from "../../components/directory-shop-list/directory-shop-list";
 
-const ShopPage = (props) => {
+const DirectoryShopPage = (props) => {
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -22,21 +20,11 @@ const ShopPage = (props) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div>
+      <div className="directory-shop-page">
         <Route
           exact
-          path={`${props.match.path}`}
-          component={CollectionsOverview}
-        />
-        <Route
-          exact
-          path={`${props.match.path}/:collectionId`}
-          component={Collection}
-        />
-        <Route
-          exact
-          path={`${props.match.path}/:collectionId/:itemId`}
-          component={ArticleDetails}
+          path={`${props.match.path}/:directoryName`}
+          component={DirectoryShopList}
         />
       </div>
       <Newsletter />
@@ -45,4 +33,4 @@ const ShopPage = (props) => {
   );
 };
 
-export default ShopPage;
+export default DirectoryShopPage;

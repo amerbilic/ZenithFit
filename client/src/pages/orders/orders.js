@@ -12,9 +12,9 @@ import {
   Price,
   OrderDetails,
   HorRule,
+  OrderButton,
 } from "./orders.styles.js";
-const Orders = ({ orders }) => {
-
+const Orders = (props) => {
   return (
     <Fragment>
       <Container>
@@ -24,12 +24,15 @@ const Orders = ({ orders }) => {
         <Right>
           <OrdersList>
             <Title>Your Orders</Title>
-            {orders.map((order) => (
+            {props.orders.map((order) => (
               <Fragment key={order.id}>
                 <OrderItem>
                   <OrderDetails>
                     <OrderNumber>Order No.00000{order.id}</OrderNumber>
                     <Price>${order.total}</Price>
+                    <OrderButton to={`/profile/orders/${order.id}`}>
+                      View Order
+                    </OrderButton>
                   </OrderDetails>
                   {order.order_items
                     .filter((item, idx) => idx < 3)

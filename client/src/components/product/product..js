@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/index";
 import { calcRating, getRatings } from "../../helpers/calculateRating";
 import StarRatingDetail from "../UI/Star-Rating-Detail/star-rating-detail";
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Info = styled.div`
   opacity: 0;
@@ -110,11 +110,10 @@ const CollectionStar = styled.div`
 
 const Product = (props) => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const history = useHistory();
-  const ratingScores = props.rating.map(getRatings);
-  const totalRating = ratingScores.reduce(calcRating, 0);
-  const averageRating = totalRating / ratingScores.length;
+  const ratingScores = props.rating ? props.rating.map(getRatings) : 0;
+  const totalRating = props.rating ? ratingScores.reduce(calcRating, 0) : 0;
+  const averageRating = props.rating ? totalRating / ratingScores.length : 0;
   const addItemHandler = () => {
     dispatch(
       cartActions.addToCart({
@@ -127,7 +126,7 @@ const Product = (props) => {
   };
 
   const searchClickHandler = () => {
-    history.push(`${location.pathname}/${props.id}`);
+    history.push(`/shop/articles/${props.id}`);
   };
 
   return (
@@ -136,21 +135,25 @@ const Product = (props) => {
         <Container>
           <Circle />
           <Image src={props.img} />
-          <Info>
-            <Icon>
-              <ShoppingCartOutlined onClick={addItemHandler} />
-            </Icon>
-            <Icon>
-              <SearchOutlined onClick={searchClickHandler} />
-            </Icon>
-          </Info>
+          {!props.review && (
+            <Info>
+              <Icon>
+                <ShoppingCartOutlined onClick={addItemHandler} />
+              </Icon>
+              <Icon>
+                <SearchOutlined onClick={searchClickHandler} />
+              </Icon>
+            </Info>
+          )}
         </Container>
         <DetailContainer>
           <Name>{props.name}</Name>
           <Price>${props.price}</Price>
         </DetailContainer>
         <CollectionStar>
-          <StarRatingDetail size={20} rating={averageRating} />
+          {!props.review && (
+            <StarRatingDetail size={20} rating={averageRating} />
+          )}
         </CollectionStar>
       </MainContainer>
     </Fragment>

@@ -29,7 +29,7 @@ const processOrder = async (req, res, next) => {
           data: {
             quantity: element.quantity,
             order_id: newOrder.id,
-            article_id: element.article_id,
+            article_id: element.id,
           },
         });
       });

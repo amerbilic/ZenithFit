@@ -22,6 +22,15 @@
 
 .collection-loading {
   text-align: center;
-  color:crimson;
-  font-size:40px;
+  color: teal;
+  font-size: 40px;
+}
+
+@media only screen and (max-width: 380px) {
+  .collection-page {
+    .items {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }

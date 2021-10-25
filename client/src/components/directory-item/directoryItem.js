@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { mobile } from "../../responsive";
 
 const Container = styled.div`
   flex: 1;
@@ -11,6 +13,9 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  ${mobile({
+    height: "20vh",
+  })}
 `;
 const Info = styled.div`
   position: absolute;
@@ -28,8 +33,12 @@ const Title = styled.h1`
   background-color: black;
   margin: 20px;
   padding: 5px 10px;
+  ${mobile({
+    margin: "20px",
+    fontSize: "14px",
+  })}
 `;
-const Button = styled.button`
+const Button = styled(Link)`
   border: none;
   padding: 12px;
   background-color: black;
@@ -39,11 +48,15 @@ const Button = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background: #5DFDCB;
-    color:black;
+    background: #5dfdcb;
+    color: black;
     transform: scale(1.1);
     transition: all 0.3s ease;
   }
+
+  ${mobile({
+    padding: "5px",
+  })}
 `;
 
 function DirectoryItem({ item }) {
@@ -52,7 +65,7 @@ function DirectoryItem({ item }) {
       <Image src={item.imageUrl} />
       <Info>
         <Title>{item.title.toUpperCase()}</Title>
-        <Button>SHOP NOW</Button>
+        <Button to={`${item.linkUrl}`}>SHOP NOW</Button>
       </Info>
     </Container>
   );

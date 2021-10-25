@@ -22,25 +22,20 @@ const getAddressesbyUserId = async (req, res, next) => {
     const id = parseInt(req.params.id);
 
     const checkUser = await prisma.user.findFirst({
-      where:{id}
-    })
-    
-    if (!checkUser) { throw createError.NotFound('This user does not exist in the database.')};
+      where: { id },
+    });
+
+    if (!checkUser) {
+      throw createError.NotFound("This user does not exist in the database.");
+    }
 
     const addressList = await prisma.address.findMany({
-      where:{
-        userId: id,
+      where: {
+        user_id: id,
       },
-      select:{
-        addressLine:true,
-        city:true,
-        postalCode:true,
-        country:true,
-      }
     });
 
     res.status(200).json(addressList);
-
   } catch (err) {
     next(err);
   }
@@ -79,14 +74,14 @@ const addAddress = async (req, res, next) => {
       throw createError.BadRequest("Please provide all required fields.");
     }
 
+    console.log(req.body);
     const searchAddress = await prisma.address.findFirst({
       where: {
         addressLine,
-        city,
       },
     });
 
-    if (searchAddress) {
+    if (searchAddress !== null) {
       throw createError.Conflict("Address by this name already exists.");
     }
 
@@ -137,5 +132,5 @@ module.exports = {
   getAddressById,
   addAddress,
   deleteAddress,
-  getAddressesbyUserId
+  getAddressesbyUserId,
 };

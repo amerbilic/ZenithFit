@@ -15,8 +15,9 @@ import articlesSlice from "./Articles/articlesSlice";
 import ordersSlice from "./Orders/ordersSlice";
 import loginReducer from "./Auth/loginSlice";
 import userReducer from "./User/userSlice";
-import adressessReducer from './Addresses/adressesSlice';
-import paymentCardsReducer from './Payment-Cards/payment-cardsSlice';
+import adressessReducer from "./Addresses/adressesSlice";
+import paymentCardsReducer from "./Payment-Cards/payment-cardsSlice";
+import goalsSlice from "./Goals/goals";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -27,6 +28,11 @@ const cartSlice = createSlice({
     Price: 0,
   },
   reducers: {
+    resetCart(state) {
+      state.cartItems = [];
+      state.totalQuantity = 0;
+      state.Price = 0;
+    },
     toggleCart(state) {
       state.hidden = !state.hidden;
     },
@@ -82,11 +88,12 @@ const store = configureStore({
   reducer: {
     cart: persistedCart,
     directory: directorySlice.reducer,
+    goals: goalsSlice.reducer,
     articles: articlesSlice.reducer,
     orders: ordersSlice.reducer,
     login: loginReducer,
     user: userReducer,
-    addresses:adressessReducer,
+    addresses: adressessReducer,
     paymentCards: paymentCardsReducer,
   },
   middleware: (getDefaultMiddleware) =>

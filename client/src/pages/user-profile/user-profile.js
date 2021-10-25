@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchOrdersData } from "../../store/Orders/orders-actions";
 import Addresses from "../addresses/addresses";
 import PaymentCards from "../payment-cards/payment-cards";
+import OrderDetails from "../order-details/order-details";
 
 const UserProfile = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const UserProfile = (props) => {
       behavior: "smooth",
     });
     if (loggedInUser.username) dispatch(fetchOrdersData(loggedInUser.id));
-  }, []);
+  }, [dispatch, loggedInUser]);
 
   return (
     <motion.div
@@ -36,6 +37,9 @@ const UserProfile = (props) => {
       </Route>
       <Route exact path={`${props.match.path}/orders`}>
         <Orders orders={orderList} />
+      </Route>
+      <Route path={`${props.match.path}/orders/:orderId`}>
+        <OrderDetails orders={orderList} />
       </Route>
       <Route exact path={`${props.match.path}/account`}>
         <UserAccountDetails />

@@ -72,3 +72,21 @@ export const fetchBestSellers = () => {
   };
 };
 
+export const fetchDirectoryList = (directoryName) => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      dispatch(articlesActions.toggleIsLoading(true));
+      const response = await axios.get(`/category/directory/${directoryName}`);
+      const data = response.data;
+      return data;
+    };
+
+    try {
+      const articlesData = await fetchData();
+      dispatch(articlesActions.toggleIsLoading(false));
+      dispatch(articlesActions.replaceData(articlesData));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+};

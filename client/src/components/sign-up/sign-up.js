@@ -2,22 +2,22 @@ import FormInput from "../form-input/form-input";
 import Button from "../UI/Button/button";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  loginPending,
   loginSuccess,
   loginFail,
 } from "../../store/Auth/loginSlice";
 import { userRegister } from "../../store/Auth/login-actions";
 import { getUserProfile } from "../../store/User/user-actions";
 import toast from "react-hot-toast";
+import BounceLoader from "react-spinners/BounceLoader";
 
 import "./sign-up.styles.scss";
 
 const SignUp = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.login);
+  const [isLoading, setIsLoading] = useState(false);
   const [emailInput, SetEmailInput] = useState("");
   const [passwordInput, SetPasswordInput] = useState("");
   const [usernameInput, SetUsernameInput] = useState("");
@@ -39,22 +39,20 @@ const SignUp = (props) => {
     setConfirmPasswordInput(event.target.value);
   };
 
-  const notify = (message) => toast.error(message);
-
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    dispatch(loginPending());
     const enteredEmail = emailInput;
     const enteredPassword = passwordInput;
     const enteredUsername = usernameInput;
     const enteredConfirmPassword = confirmPasswordInput;
 
     if (enteredConfirmPassword !== enteredPassword) {
-      alert("Passwords must match");
+      toast.error("Passwords must match");
       return;
     }
 
+    setIsLoading(true);
     try {
       await userRegister({
         email: enteredEmail,
@@ -66,6 +64,7 @@ const SignUp = (props) => {
 
       dispatch(loginSuccess());
       dispatch(getUserProfile());
+      setIsLoading(false);
 
       history.replace("/");
     } catch (error) {
@@ -111,9 +110,9 @@ const SignUp = (props) => {
           label="Confirm Password"
           required
         />
-        <Button type="submit">Sign up</Button>
-        {isLoading && <p>Loading...</p>}
+        {!isLoading && <Button type="submit">Sign up</Button>}
       </form>
+        <BounceLoader color="teal" loading={isLoading}/>
     </div>
   );
 };

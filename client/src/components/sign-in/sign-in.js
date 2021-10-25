@@ -11,6 +11,7 @@ import {
 } from "../../store/Auth/loginSlice";
 import { userLogin } from "../../store/Auth/login-actions";
 import { getUserProfile } from "../../store/User/user-actions";
+import BounceLoader from "react-spinners/BounceLoader";
 import toast from "react-hot-toast";
 
 const SignIn = () => {
@@ -77,8 +78,8 @@ const SignIn = () => {
           onChange={passwordHandler}
           required
         />
-        <Button type="submit">Sign in</Button>
-        {isLoading && <p>Loading...</p>}
+        {!isLoading && <Button type="submit">Sign in</Button>}
+        <BounceLoader color="teal" loading={isLoading} size={30} />
       </form>
     </div>
   );
