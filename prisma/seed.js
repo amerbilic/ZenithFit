@@ -120,7 +120,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -136,7 +136,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -152,7 +152,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -168,7 +168,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -184,7 +184,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -200,7 +200,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -216,7 +216,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -232,7 +232,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -248,7 +248,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -264,7 +264,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -280,7 +280,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -296,7 +296,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -312,7 +312,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -328,7 +328,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -344,7 +344,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -360,7 +360,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -376,7 +376,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
@@ -392,7 +392,7 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     await prisma.articleInventory.create({
       data: {
-        quantity:i,
+        quantity: i,
         articles: {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
