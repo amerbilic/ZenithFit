@@ -6,7 +6,8 @@ const {
   getCategoryById,
   deleteCategory,
   getAllArticlesByCategory,
-  getDirectoryArticles
+  getDirectoryArticles,
+  getDirectoryArticlesByGoal
 } = require("./articleCategory.controller");
 
 const articleCategoryRouter = express.Router();
@@ -17,6 +18,7 @@ articleCategoryRouter.delete("/:id", getCategoryById);
 articleCategoryRouter.get("/:id", deleteCategory);
 articleCategoryRouter.get("/articles/:name",getAllArticlesByCategory)
 articleCategoryRouter.get("/directory/:name",getDirectoryArticles)
+articleCategoryRouter.get("/goals/:name",getDirectoryArticlesByGoal)
 
 
 module.exports = articleCategoryRouter;

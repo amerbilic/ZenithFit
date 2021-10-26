@@ -1,31 +1,38 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDirectoryList } from "../../store/Articles/articles-actions";
+import {
+  fetchDirectoryList,
+  fetchGoalsDirectoryList,
+} from "../../store/Articles/articles-actions";
+import { useParams } from "react-router-dom";
 import "./directory-shop-list.styles.scss";
 import DirectoryShopItem from "../directory-shop-item/directory-shop-item";
 
 const DirectoryShopList = (props) => {
   const dispatch = useDispatch();
   const { listItems, isLoading } = useSelector((state) => state.articles);
-  const directoryId = props.match.params.directoryName;
+  const { goalName } = useParams();
 
   useEffect(() => {
-    dispatch(fetchDirectoryList(directoryId));
-  }, [directoryId, dispatch]);
+    if (props.goals) {
+      dispatch(fetchGoalsDirectoryList(goalName));
+    } else {
+      dispatch(fetchDirectoryList(props.match.params.directoryName));
+    }
+  }, []);
 
   return (
     <div className="collections-overview">
       {!isLoading ? (
-        listItems
-          .map((item) => {
-            return (
-              <DirectoryShopItem
-                key={item.id}
-                title={item.name}
-                items={item.articles}
-              />
-            );
-          })
+        listItems.map((item) => {
+          return (
+            <DirectoryShopItem
+              key={item.id}
+              title={item.name}
+              items={item.articles}
+            />
+          );
+        })
       ) : (
         <p>Loading...</p>
       )}

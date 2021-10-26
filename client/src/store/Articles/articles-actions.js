@@ -90,3 +90,22 @@ export const fetchDirectoryList = (directoryName) => {
     }
   };
 };
+
+export const fetchGoalsDirectoryList = (directoryName) => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      dispatch(articlesActions.toggleIsLoading(true));
+      const response = await axios.get(`/category/goals/${directoryName}`);
+      const data = response.data;
+      return data;
+    };
+
+    try {
+      const articlesData = await fetchData();
+      dispatch(articlesActions.toggleIsLoading(false));
+      dispatch(articlesActions.replaceData(articlesData));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+};

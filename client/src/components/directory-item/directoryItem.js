@@ -59,13 +59,21 @@ const Button = styled(Link)`
   })}
 `;
 
-function DirectoryItem({ item }) {
+function DirectoryItem(props) {
   return (
     <Container>
-      <Image src={item.imageUrl} />
+      <Image src={props.item.imageUrl} />
       <Info>
-        <Title>{item.title.toUpperCase()}</Title>
-        <Button to={`${item.linkUrl}`}>SHOP NOW</Button>
+        <Title>{props.item.title.toUpperCase()}</Title>
+        <Button
+          to={
+            props.gender
+              ? `${props.gender}/${props.item.linkUrl}`
+              : `${props.item.linkUrl}`
+          }
+        >
+          SHOP NOW
+        </Button>
       </Info>
     </Container>
   );

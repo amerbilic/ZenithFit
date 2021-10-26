@@ -16,11 +16,11 @@ const Container = styled.div`
 
 const Directory = (props) => {
   const directory = useSelector((state) => state.directory.directoryItems);
-
+  
   return (
     <Container>
       {props.items
-        ? props.items.map((item) => <DirectoryItem key={item.id} item={item} />)
+        ? props.items.map((item) => <DirectoryItem key={item.id} item={item} gender={props.gender}/>)
         : directory.map((item) => <DirectoryItem key={item.id} item={item} />)}
     </Container>
   );

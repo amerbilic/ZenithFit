@@ -158,6 +158,45 @@ const getDirectoryArticles = async (req, res, next) => {
     next(err);
   }
 };
+
+const getDirectoryArticlesByGoal = async (req, res, next) => {
+  try {
+    const directoryName = req.params.name;
+
+    const returnList = await prisma.articleCategory.findMany({
+      where: {
+        goalCategory: {
+          contains: directoryName,
+        },
+      },
+      select: {
+        id: true,
+        name: true,
+        articles: {
+          select: {
+            id: true,
+            name: true,
+            desc: true,
+            img: true,
+            price: true,
+            rating: {
+              select: {
+                rating: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!returnList)
+      throw createError.NotFound("This directory does not exist.");
+
+    res.status(200).json(returnList);
+  } catch (err) {
+    next(err);
+  }
+};
 module.exports = {
   getAllCategories,
   addCategory,
@@ -165,4 +204,5 @@ module.exports = {
   deleteCategory,
   getAllArticlesByCategory,
   getDirectoryArticles,
+  getDirectoryArticlesByGoal
 };
