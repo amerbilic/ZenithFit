@@ -3,6 +3,9 @@ const prisma = new PrismaClient();
 const faker = require("faker");
 
 async function main() {
+  await prisma.articleInventory.deleteMany();
+  await prisma.article.deleteMany();
+  await prisma.articleCategory.deleteMany();
 
   await prisma.articleCategory.create({
     data: {
