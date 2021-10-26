@@ -16,15 +16,16 @@ const DirectoryShopList = (props) => {
   return (
     <div className="collections-overview">
       {!isLoading ? (
-        listItems.map((item) => {
-          return (
-            <DirectoryShopItem
-              key={item.id}
-              title={item.name}
-              items={item.articles}
-            />
-          );
-        })
+        listItems
+          .map((item) => {
+            return (
+              <DirectoryShopItem
+                key={item.id}
+                title={item.name}
+                items={item.articles}
+              />
+            );
+          })
       ) : (
         <p>Loading...</p>
       )}

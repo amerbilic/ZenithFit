@@ -8,8 +8,7 @@ import Directory from "../../components/directory/directory";
 import { useSelector } from "react-redux";
 
 const GoalsPage = (props) => {
-  const itemList = useSelector((state) => state.goals.goalsItems);
-  console.log(itemList);
+  const goalList = useSelector((state) => state.goals.goalsItems);
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -25,7 +24,7 @@ const GoalsPage = (props) => {
     >
       <div className="goals-page">
         <Route exact path={`${props.match.path}`}>
-          <Directory items={itemList} />
+          <Directory items={goalList} />
         </Route>
       </div>
       <Newsletter />
