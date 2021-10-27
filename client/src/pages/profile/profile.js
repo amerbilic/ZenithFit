@@ -42,15 +42,17 @@ const Profile = ({ user, orders }) => {
                 .filter((item, idx) => idx < 3)
                 .map((item) => (
                   <Fragment key={item.id}>
-                  <RecentOrderWrapper >
-                    <RecentOrderTitle>Order No.00000{item.id}</RecentOrderTitle>
-                    {item.order_items
-                      .filter((item, idx) => idx < 3)
-                      .map((item) => (
-                        <Image key={item.article.id} src={item.article.img} />
-                      ))}
-                  </RecentOrderWrapper>
-                  <HorRule/>
+                    <RecentOrderWrapper>
+                      <RecentOrderTitle>
+                        Order No.00000{item.id}
+                      </RecentOrderTitle>
+                      {item.order_items
+                        .filter((item, idx) => idx < 3)
+                        .map((item) => (
+                          <Image key={item.article.id} src={item.article.img} />
+                        ))}
+                    </RecentOrderWrapper>
+                    <HorRule />
                   </Fragment>
                 ))}
             </RecentOrderList>
