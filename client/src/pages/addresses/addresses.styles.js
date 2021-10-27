@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Select from "react-select";
 import Button from "../../components/UI/Button/button";
+import { mobile } from "../../responsive";
 
 export const Container = styled.div`
   width: 100%;
@@ -14,12 +15,21 @@ export const Left = styled.div`
   right: 30px;
   margin-top: 50px;
   position: relative;
+
+  ${mobile({
+    width: "50%",
+    right: "20px",
+  })}
 `;
 export const Right = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
   margin-top: 50px;
+
+  ${mobile({
+    width: "50%",
+  })}
 `;
 
 export const AddressList = styled.div`
@@ -30,11 +40,19 @@ export const AddressList = styled.div`
   height: 90%;
   overflow: scroll;
   align-items: center;
+
+  ${mobile({
+    width: "95%",
+  })}
 `;
 
 export const StyledSelect = styled(Select)`
   width: 40%;
   margin-top: 5%;
+
+  ${mobile({
+    width: "75%",
+  })}
 `;
 
 export const PageTitle = styled.div`
@@ -44,25 +62,112 @@ export const PageTitle = styled.div`
   justify-content: center;
   margin-bottom: 15px;
   margin-top: 15px;
+
+  ${mobile({
+    fontSize: "20px",
+  })}
 `;
 
-export const NewAddressButton = styled(Button)`
+export const NewAddressButton = styled.button`
   margin: 10px 0px;
   height: 45px;
   align-items: center;
+  letter-spacing: 0.5px;
+  line-height: 50px;
+  padding: 0 35px 0 35px;
+  font-size: 15px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease-out;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+
+  &:hover {
+    background: var(--bg-highlight);
+    color: black;
+    transition: all 0.3s ease-out;
+  }
+
+  ${mobile({
+    height: "40px",
+    alignItems: "center",
+    fontSize: "12px",
+    padding: "0",
+    width: "140px",
+    margin: "10px 0px 20px 0px",
+  })}
 `;
 
-export const SaveButton = styled(Button)`
+export const SaveButton = styled.button`
   margin: 10px 0px;
-  height: 50px;
+  height: 45px;
+  align-items: center;
+  letter-spacing: 0.5px;
+  line-height: 50px;
+  padding: 0 35px 0 35px;
+  font-size: 15px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease-out;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
   margin-left: 15%;
+
+  &:hover {
+    background: var(--bg-highlight);
+    color: black;
+    transition: all 0.3s ease-out;
+  }
+  ${mobile({
+    height: "40px",
+    alignItems: "center",
+    fontSize: "12px",
+    padding: "0",
+    width: "122px",
+    margin: "10px 0px 20px 0px",
+  })}
 `;
 
-export const EditButton = styled(Button)`
-  margin: 10px 10px;
+export const EditButton = styled.button`
+  margin: 10px 0px;
   height: 40px;
-  width: 10%;
   align-items: center;
+  letter-spacing: 0.5px;
+  line-height: 50px;
+  padding: 0 35px 0 35px;
+  font-size: 15px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease-out;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  width: 10%;
+
+  &:hover {
+    background: var(--bg-highlight);
+    color: black;
+    transition: all 0.3s ease-out;
+  }
+  ${mobile({
+    height: "40px",
+    alignItems: "center",
+    fontSize: "12px",
+    padding: "0",
+    width: "140px",
+    margin: "10px 0px 20px 0px",
+  })}
 `;
 
 export const AddressTitle = styled.div`
@@ -73,7 +178,17 @@ export const ButtonContainer = styled.div`
   display: flex;
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+  & > .group {
+    margin: 0px;
+  }
+
+  ${mobile({
+    width: "60%",
+    margin: "5px",
+    padding: "0",
+  })}
+`;
 
 export const Address = styled.div`
   display: flex;
@@ -102,4 +217,10 @@ export const City = styled.h4`
 export const Country = styled.h4`
   font-weight: 500;
   margin: 5px 5px;
+`;
+
+export const NoAddress = styled.div`
+  ${mobile({
+    marginLeft: "15px",
+  })}
 `;

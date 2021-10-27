@@ -1,19 +1,17 @@
-import "./hero.styles.scss";
-import Button from '../Button/button';
+import Button from "../Button/button";
 import { useHistory } from "react-router-dom";
+import { Container, Title, Paragraph, ButtonsDiv } from "./hero.styles";
 
 const Hero = () => {
-  const history= useHistory();
+  const history = useHistory();
   return (
-    <div className="hero-container">
-      <h1 className='hero-title'>UP TO 60% OFF THIS WEEK</h1>
-      <p className='hero-p'>What are you waiting for?</p>
-      <div className='hero-btns'>
-        <Button onClick={()=> history.push('/shop')}>
-          START SHOPPING
-        </Button>
-      </div>
-    </div>
+    <Container>
+      <Title>UP TO 60% OFF THIS WEEK</Title>
+      <Paragraph>What are you waiting for?</Paragraph>
+      <ButtonsDiv>
+        <Button onClick={() => history.push("/shop")}>START SHOPPING</Button>
+      </ButtonsDiv>
+    </Container>
   );
 };
 

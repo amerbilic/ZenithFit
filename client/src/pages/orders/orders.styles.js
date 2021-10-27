@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { mobile } from "../../responsive";
 
 export const Container = styled.div`
   width: 100%;
@@ -13,12 +14,22 @@ export const Left = styled.div`
   right: 30px;
   margin-top: 50px;
   position: relative;
+
+  ${mobile({
+    width:'50%',
+    right:"20px"
+  })}
+
 `;
 export const Right = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
   margin-top: 50px;
+
+  ${mobile({
+    width: "50%"
+  })}
 `;
 
 export const OrdersList = styled.div`
@@ -28,6 +39,10 @@ export const OrdersList = styled.div`
   flex-direction: column;
   height: 90%;
   overflow: scroll;
+
+  ${mobile({
+    width: "90%"
+  })}
 `;
 
 export const Title = styled.div`
@@ -37,6 +52,10 @@ export const Title = styled.div`
   justify-content: center;
   margin-bottom: 15px;
   margin-top: 15px;
+
+  ${mobile({
+    fontSize:20
+  })}
 `;
 
 export const OrderItem = styled.div`
@@ -47,6 +66,11 @@ export const OrderItem = styled.div`
   margin-bottom: 10px;
   margin-left: 25px;
   margin-top: 5px;
+
+  ${mobile({
+    flexDirection:"column",
+    margin:"0"
+  })}
 `;
 
 export const Image = styled.img`
@@ -55,6 +79,9 @@ export const Image = styled.img`
   width: 20%;
   margin-right: 10px;
   border:1px solid black;
+  ${mobile({
+    display: "none"
+  })}
 `;
 
 export const OrderNumber = styled.div`
@@ -68,6 +95,10 @@ export const OrderNumber = styled.div`
 export const Price = styled.div`
   font-weight: 400;
   color: teal;
+
+  ${mobile({
+    fontWeight: "800"
+  })}
 `;
 
 export const OrderDetails = styled.div`
@@ -75,6 +106,10 @@ export const OrderDetails = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+   ${mobile({
+    width: "50%"
+  })}
 `;
 
 export const HorRule = styled.hr`
@@ -107,4 +142,13 @@ export const OrderButton = styled(Link)`
     color: black;
     transition: all 0.3s ease-out;
   }
+
+  ${mobile({
+    height: "40px",
+    alignItems:"center",
+    fontSize:"14px",
+    padding:"0",
+    width:"120px",
+    margin:"10px"
+  })}
 `;

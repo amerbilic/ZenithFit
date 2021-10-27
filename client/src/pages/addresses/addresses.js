@@ -20,6 +20,7 @@ import {
   EditButton,
   AddressTitle,
   ButtonContainer,
+  NoAddress
 } from "./addresses.styles";
 import countryList from "react-select-country-list";
 import {
@@ -124,8 +125,8 @@ const Addresses = () => {
                     </ButtonContainer>
                   </Address>
                 ))}
-            {addressList.length === 0 &&
-              "You currently have no registered addresses"}
+            {addressList.length === 0 && (<NoAddress>
+              You currently have no registered addresses</NoAddress>)}
             <NewAddressButton onClick={handleClick}>
               Add new address
             </NewAddressButton>

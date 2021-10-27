@@ -12,6 +12,11 @@ export const Line = styled.hr`
   line-height: 0px;
   margin-left: 30px;
   margin-top: 20px;
+
+  ${mobile({
+    marginLeft:"10px"
+  })}
+  
 `;
 
 export const Navigation = styled.div`
@@ -21,11 +26,21 @@ export const Navigation = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+
+  ${mobile({
+    height:"90%",
+    width:"80%"
+  })}
 `;
 export const TitleLeft = styled.h2`
   display: flex;
   justify-content: flex-start;
   padding: 20px 0px 10px 30px;
+
+  ${mobile({
+    paddingLeft:"10px",
+    fontSize:"20px"
+  })}
 `;
 
 export const OptionList = styled.ul`
@@ -33,11 +48,15 @@ export const OptionList = styled.ul`
   flex-direction: column;
   align-items: left;
   list-style: none;
+  
 `;
 
 export const Icon = styled.div`
   display: flex;
-  padding-right: 20px;
+  padding-right: 10px;
+  ${mobile({
+    display:"none"
+  })}
 `;
 
 export const LogoutLink = styled(Link)`
@@ -55,6 +74,9 @@ export const LogoutLink = styled(Link)`
     background: var(--bg-highlight);
     transition: all 0.3s ease;
   }
+  ${mobile({
+    paddingLeft:"10px"
+  })}
 `;
 
 export const NavLink = styled(Link)`
@@ -70,4 +92,9 @@ export const NavLink = styled(Link)`
     background: var(--bg-highlight);
     transition: all 0.5s ease;
   }
+
+  ${mobile({
+    paddingLeft:"10px"
+  })}
+
 `;

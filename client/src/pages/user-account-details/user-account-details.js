@@ -129,7 +129,7 @@ const UserAccountDetails = () => {
                 value={confirmPassword}
                 onChange={confirmPasswordHandler}
               />
-              <SaveButton type="submit">Save Changes</SaveButton>
+              <SaveButton type="submit">Save</SaveButton>
             </Form>
           ) : (
             <div>loading...</div>

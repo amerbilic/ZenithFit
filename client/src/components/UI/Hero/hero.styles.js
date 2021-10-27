@@ -1,4 +1,7 @@
-.hero-container {
+import styled from "styled-components";
+import { mobile } from "../../../responsive";
+
+export const Container = styled.div`
   background: url("https://globaljabar.com/wp-content/uploads/2021/02/xbreak-workout_602724-1.jpg.pagespeed.ic_.v8byD7su-e-1.jpg")
     center center/cover no-repeat;
   height: 60vh;
@@ -10,19 +13,24 @@
   object-fit: contain;
   justify-content: center;
   overflow: hidden;
-}
+`;
 
-.hero-title {
+export const Title = styled.h1`
   color: azure;
-  padding:20px 0px;
-}
+  padding: 20px 0px;
 
-.hero-p {
+  ${mobile({
+    padding: "0",
+    fontSize: "25px",
+  })}
+`;
+
+export const Paragraph = styled.p`
   color: white;
   font-size: 20px;
-  padding:20px 0px;
-}
+  padding: 20px 0px;
+`;
 
-.hero-btns {
-  margin-top:20px;
-}
+export const ButtonsDiv = styled.div`
+  margin-top: 20px;
+`;
