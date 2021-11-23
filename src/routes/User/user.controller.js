@@ -6,6 +6,7 @@ const getAllUsers = async (req, res, next) => {
   try {
     const getUsers = await prisma.user.findMany({
       select: {
+        id:true,
         username: true,
         firstname: true,
         lastname: true,
@@ -14,7 +15,6 @@ const getAllUsers = async (req, res, next) => {
         createdAt: true,
         updatedAt: true,
         addresses: true,
-        payments: true,
       },
     });
     res.status(200).json(getUsers);
@@ -38,7 +38,6 @@ const getUser = async (req, res, next) => {
         telephone: true,
         status: true,
         addresses: true,
-        payments: true,
         id: true,
       },
     });
@@ -122,7 +121,6 @@ const updateUser = async (req, res, next) => {
         createdAt: true,
         updatedAt: true,
         addresses: true,
-        payments: true,
       },
     });
 

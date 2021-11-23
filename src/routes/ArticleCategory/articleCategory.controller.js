@@ -113,6 +113,7 @@ const getAllArticlesByCategory = async (req, res, next) => {
     if (!returnList) {
       throw createError.NotFound("Category by this name not found.");
     } else {
+      console.log(returnList);
       res.status(200).json(returnList);
     }
   } catch (err) {
@@ -204,5 +205,5 @@ module.exports = {
   deleteCategory,
   getAllArticlesByCategory,
   getDirectoryArticles,
-  getDirectoryArticlesByGoal
+  getDirectoryArticlesByGoal,
 };

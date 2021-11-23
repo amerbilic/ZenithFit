@@ -24,7 +24,6 @@ export const fetchOrderData = (orderId) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await axios.get(`/orders/${orderId}`);
-
       const data = response.data;
       return data;
     };
