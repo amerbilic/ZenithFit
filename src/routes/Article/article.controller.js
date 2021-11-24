@@ -47,6 +47,7 @@ const getArticleById = async (req, res, next) => {
         category: {
           select: {
             name: true,
+            id:true
           },
         },
       },
@@ -82,6 +83,48 @@ const deleteArticle = async (req, res, next) => {
       });
       res.status(204).json({ success: "Article successfully deleted" });
     }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const updateArticle = async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id);
+    const { name, desc, price, category_id, quantity } = req.body;
+
+    const getArticle = await prisma.article.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    const checkCollision = await prisma.article.findFirst({
+      where: {
+        name,
+      },
+    });
+
+    if (checkCollision)
+      throw createError.Conflict("An article by this name already exists");
+
+    if (!getArticle)
+      throw createError.NotFound("Article with this Id does not exist.");
+
+    await prisma.article.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+        desc,
+        price,
+        category_id,
+        quantity,
+      },
+    });
+
+    res.status(200).json({ success: "Article succesfully updated" });
   } catch (err) {
     next(err);
   }
@@ -161,4 +204,5 @@ module.exports = {
   deleteArticle,
   createArticle,
   getBestSellers,
+  updateArticle
 };

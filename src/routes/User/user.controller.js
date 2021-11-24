@@ -8,6 +8,7 @@ const getAllUsers = async (req, res, next) => {
       select: {
         id:true,
         username: true,
+        email:true,
         firstname: true,
         lastname: true,
         telephone: true,

@@ -125,7 +125,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 1,
           },
@@ -141,7 +141,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 2,
           },
@@ -157,7 +157,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 3,
           },
@@ -173,7 +173,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 4,
           },
@@ -189,7 +189,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 5,
           },
@@ -205,7 +205,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 6,
           },
@@ -221,7 +221,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img:`${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 7,
           },
@@ -237,7 +237,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 8,
           },
@@ -253,7 +253,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 9,
           },
@@ -269,7 +269,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img:`${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 10,
           },
@@ -285,7 +285,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 11,
           },
@@ -301,7 +301,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 12,
           },
@@ -317,7 +317,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 13,
           },
@@ -333,7 +333,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 14,
           },
@@ -349,7 +349,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 15,
           },
@@ -365,7 +365,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 16,
           },
@@ -381,7 +381,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img: `${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 17,
           },
@@ -397,7 +397,7 @@ async function main() {
           create: {
             name: `The ${faker.date.weekday()} ${faker.commerce.productName()} `,
             desc: faker.commerce.productDescription(),
-            img: faker.image.food(),
+            img:`${faker.image.food()}?random=${Date.now()}`,
             price: 50,
             category_id: 18,
           },

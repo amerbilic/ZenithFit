@@ -6,12 +6,14 @@ const {
   deleteArticle,
   createArticle,
   getBestSellers,
+  updateArticle
 } = require("./article.controller");
 
 const articlesRouter = express.Router();
 
 articlesRouter.get("/", getAllArticles);
 articlesRouter.get("/article/:id", getArticleById);
+articlesRouter.put("/:id", updateArticle);
 articlesRouter.get("/bestsellers", getBestSellers);
 articlesRouter.delete("/:id", deleteArticle);
 articlesRouter.post("/", createArticle);
