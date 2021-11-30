@@ -1,8 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import Product from "../product/product.";
-import { fetchBestSellers } from "../../store/Articles/articles-actions";
+import {
+  fetchBestSellers,
+  fetchRecommendedArticles,
+} from "../../store/Articles/articles-actions";
 
 const Container = styled.div`
   padding: 20px;
@@ -18,31 +21,51 @@ const Title = styled.h1`
   margin-top: 50px;
 `;
 
-const Products = () => {
+const Products = ({ recommended, articleId }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const bestSellers = useSelector((state) => state.articles.bestSellers);
+  const item = useSelector((state) => state.articles.detailItem);
+  const recommendedArticles = useSelector(
+    (state) => state.articles.recommendedArticles
+  );
+  const filteredArray = recommendedArticles.filter((article) => {
+    return article.id !== articleId;
+  });
+  const dataArray = recommended ? filteredArray : bestSellers;
 
   useEffect(() => {
-    dispatch(fetchBestSellers());
+    const fetchData = async () => {
+      setIsLoading(true);
+      if (recommended === true) {
+        dispatch(fetchRecommendedArticles(item.category.id));
+      } else {
+        dispatch(fetchBestSellers());
+      }
+    };
+    fetchData();
+    setIsLoading(false);
   }, [dispatch]);
 
   return (
     <Fragment>
-      <Title>Best Sellers</Title>
+      <Title>{recommended ? "Similar Articles" : "Best Sellers"}</Title>
       <Container>
-        {bestSellers.length > 1 ? (
-          bestSellers.map((item) => (
-            <Product
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              price={item.price}
-              img={item.img}
-              rating={item.rating}
-            />
-          ))
+        {!isLoading ? (
+          dataArray
+            .filter((item, idx) => idx < 4)
+            .map((item) => (
+              <Product
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                price={item.price}
+                img={item.img}
+                rating={item.rating}
+              />
+            ))
         ) : (
-          <div>loading...</div>
+          <div>Loading...</div>
         )}
       </Container>
     </Fragment>

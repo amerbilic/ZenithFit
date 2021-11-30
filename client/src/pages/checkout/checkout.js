@@ -10,7 +10,7 @@ import Newsletter from "../../components/UI/Newsletter/newsletter";
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalPrice = useSelector((state) => state.cart.Price);
-  
+  const isAuth = useSelector((state) => state.login.isAuth);
 
   useEffect(() => {
     window.scrollTo({
@@ -50,14 +50,25 @@ const Checkout = () => {
         <div className="total">
           <span>TOTAL ${totalPrice}</span>
         </div>
-        <div className="test-warning">
-          *Please use the following test credit card for payments*
-          <br />
-          4242 4242 4242 4242 - Exp: 01/2023 - CVV: 123
-        </div>
-        <StripeCheckoutButton price={totalPrice} items={cartItems}/>
+
+        {isAuth ? (
+          <div className="test-warning">
+            *Please use the following test credit card for payments*
+            <br />
+            4242 4242 4242 4242 - Exp: 01/2023 - CVV: 123
+          </div>
+        ) : (
+          <div className="test-warning">
+            *Please login to finalize your order*
+          </div>
+        )}
+        <StripeCheckoutButton
+          price={totalPrice}
+          items={cartItems}
+          isDisabled={isAuth ? false : true}
+        />
       </div>
-      <Newsletter/>
+      <Newsletter />
       <Footer />
     </motion.div>
   );

@@ -76,19 +76,6 @@ export const SearchContainer = styled.div`
   })}
 `;
 
-export const Input = styled.input`
-  border: none;
-  background: #edf2f4;
-  margin-right: 5px;
-  ${mobile({
-    width: "50px",
-  })}
-
-  &:focus {
-    outline: teal;
-  }
-`;
-
 export const Center = styled.div`
   flex: 1;
   text-align: center;

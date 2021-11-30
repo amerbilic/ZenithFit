@@ -19,6 +19,41 @@ export const fetchArticlesData = () => {
   };
 };
 
+export const fetchRecommendedArticles = (categoryId) => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      const response = await axios.get(`/articles/recommender/${categoryId}`);
+
+      const data = response.data;
+      return data;
+    };
+
+    try {
+      const articleData = await fetchData();
+      dispatch(articlesActions.replaceRecommendedArticles(articleData));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+};
+
+export const fetchSearchBarData = () => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      const response = await axios.get("/articles/searchData");
+      const data = response.data;
+      return data;
+    };
+
+    try {
+      const articleData = await fetchData();
+      dispatch(articlesActions.replaceSearchData(articleData));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+};
+
 export const fetchCollectionData = (name) => {
   return async (dispatch) => {
     const fetchData = async () => {

@@ -1,8 +1,9 @@
 import "./App.scss";
 import { Fragment, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, logOut } from "./store/Auth/loginSlice";
+import { fetchSearchBarData } from "./store/Articles/articles-actions";
 import { fetchUser } from "./store/Auth/login-actions";
 import { getUserSuccess } from "./store/User/userSlice";
 import { Route, Switch, useLocation, Link } from "react-router-dom";
@@ -32,6 +33,7 @@ import GoalsPage from "./pages/goals-page/GoalsPage";
 
 const App = () => {
   const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.login.isAuth);
   const retrieveStoredToken = () => {
     const storedToken = localStorage.getItem("accessToken");
     const storedExpirationDate = localStorage.getItem("expTime");
@@ -66,6 +68,7 @@ const App = () => {
       await fetchUserData();
     };
     fetchUser();
+    dispatch(fetchSearchBarData());
   }, []);
 
   useEffect(() => {
@@ -109,7 +112,9 @@ const App = () => {
           <Navitem name="Weight">
             <NavDropDown categories={Weight} />
           </Navitem>
-          <Link className='GoalSelector' to="/goals">Goal Selector</Link>
+          <Link className="GoalSelector" to="/goals">
+            Goal Selector
+          </Link>
         </Navbar>
       </div>
       <Announcement />
@@ -119,7 +124,11 @@ const App = () => {
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/auth" component={Authorization} />
           <Route exact path="/checkout" component={Checkout} />
-          <Route path="/profile" component={UserProfile} />
+          {!isAuth ? (
+            <Route path="/profile" component={Authorization} />
+          ) : (
+            <Route path="/profile" component={UserProfile} />
+          )}
           <Route path="/directory" component={DirectoryShopPage} />
           <Route path="/goals" component={GoalsPage} />
         </Switch>

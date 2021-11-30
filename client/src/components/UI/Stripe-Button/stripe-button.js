@@ -3,7 +3,7 @@ import axios from "axios";
 import { cartActions } from "../../../store/index";
 import { useDispatch, useSelector } from "react-redux";
 
-const StripeCheckoutButton = ({ price, items }) => {
+const StripeCheckoutButton = ({ price, items, isDisabled }) => {
   const dispatch = useDispatch();
   const priceForStripe = price * 100;
   const { resetCart } = cartActions;
@@ -13,7 +13,6 @@ const StripeCheckoutButton = ({ price, items }) => {
 
   const onToken = async (token) => {
     try {
-      console.log(userId, price, items);
       await axios.post("/payment", {
         amount: priceForStripe,
         token,
@@ -48,6 +47,7 @@ const StripeCheckoutButton = ({ price, items }) => {
       panelLabel="Pay Now"
       token={onToken}
       stripeKey={publishableKey}
+      disabled={isDisabled}
     />
   );
 };

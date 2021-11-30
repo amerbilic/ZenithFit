@@ -1,6 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 let userId;
 
@@ -9,7 +9,7 @@ export const userLogin = (frmData) => {
     try {
       const res = await axios.post("/auth/login", frmData);
       resolve(res.data);
-      toast.success('Succesfully logged in!');
+      toast.success("Succesfully logged in!");
       userId = res.data.userId;
       const user = jwt_decode(res.data.accessToken);
       localStorage.setItem("accessToken", res.data.accessToken);
@@ -30,7 +30,7 @@ export const userRegister = (frmData) => {
       const res = await axios.post("/auth/signup", frmData);
       resolve(res.data);
       userId = res.data.userId;
-      toast.success('Succesfully created account!');
+      toast.success("Succesfully created account!");
       const user = jwt_decode(res.data.accessToken);
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("expTime", user.exp);
@@ -43,12 +43,15 @@ export const userRegister = (frmData) => {
     }
   });
 };
+const storedToken = localStorage.getItem("accessToken");
 
 export const fetchUser = (uId) => {
   return new Promise(async (resolve, reject) => {
     try {
       if (uId) userId = uId;
-      const res = await axios.get(`/users/${userId}`);
+      const res = await axios.get(`/users/${userId}`, {
+        headers: { "x-auth-token": storedToken },
+      });
       resolve(res.data);
     } catch (error) {
       reject(error);

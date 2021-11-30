@@ -6,8 +6,10 @@ const articlesSlice = createSlice({
   initialState: {
     listItems: [],
     collectionItems: [],
+    searchData:[],
     detailItem: [],
     bestSellers:[],
+    recommendedArticles:[],
     rating: 0,
     isLoading: true,
   },
@@ -17,6 +19,12 @@ const articlesSlice = createSlice({
     },
     replaceCollectionData(state, action) {
       state.collectionItems = action.payload;
+    },
+    replaceSearchData(state,action){
+      state.searchData = action.payload;
+    },
+    replaceRecommendedArticles(state, action) {
+      state.recommendedArticles = action.payload;
     },
     replaceDetailItem(state, action) {
       state.detailItem = action.payload;

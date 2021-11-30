@@ -1,5 +1,5 @@
 import React from "react";
-import { Search } from "@material-ui/icons";
+import SearchBar from '../Searchbar/searchbar';
 import { Fragment, useEffect } from "react";
 import CartDropdown from "../Cart-Dropdown/cart-dropdown";
 import CartIcon from "../Cart-Icon/cart-icon";
@@ -14,8 +14,6 @@ import {
   Left,
   LinkLogo,
   Language,
-  SearchContainer,
-  Input,
   Center,
   Right,
   MenuItem,
@@ -43,10 +41,7 @@ const HeaderNavbar = () => {
         <Wrapper>
           <Left>
             <Language>EN</Language>
-            <SearchContainer>
-              <Input placeholder="Search..." />
-              <Search style={{ color: "teal", fontSize: 20 }} />
-            </SearchContainer>
+            <SearchBar placeholder={"Search..."}/>
           </Left>
           <Center>
             <LinkLogo to="/">ZENITH FIT.</LinkLogo>

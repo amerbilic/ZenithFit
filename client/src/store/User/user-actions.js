@@ -5,6 +5,9 @@ import toast from "react-hot-toast";
 
 const notify = () => toast.success("Successfully updated profile data.");
 
+const storedToken = localStorage.getItem("accessToken");
+axios.defaults.headers.common['x-auth-token'] = storedToken;
+
 export const getUserProfile = () => async (dispatch) => {
   try {
     dispatch(getUserPending());

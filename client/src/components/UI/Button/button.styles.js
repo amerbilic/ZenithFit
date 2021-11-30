@@ -23,6 +23,24 @@ export const invertedButtonStyles = css`
   }
 `;
 
+export const heroButtonStyles = css`
+  border: none;
+  background-color: black;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+
+  &:hover {
+    background: #5dfdcb;
+    color: black;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+
+`;
+
 export const collectionButtonStyles = css`
   width: 80%;
   opacity: 0.7;
@@ -30,13 +48,13 @@ export const collectionButtonStyles = css`
   top: 255px;
   background-color: black;
   color: white;
-  display:none;
+  display: none;
 
   &:hover {
-    opacity:1;
+    opacity: 1;
     display: flex;
-    background-color:teal;
-    color:white;
+    background-color: teal;
+    color: white;
     transition: all 0.3s ease-out;
   }
 `;
@@ -44,6 +62,9 @@ export const collectionButtonStyles = css`
 export const getButtonStyles = (props) => {
   if (props.inverted) {
     return invertedButtonStyles;
+  }
+  if (props.hero) {
+    return heroButtonStyles;
   }
   return props.collection ? collectionButtonStyles : buttonStyles;
 };

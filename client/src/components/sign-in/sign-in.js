@@ -45,7 +45,6 @@ const SignIn = () => {
       }
 
       dispatch(loginSuccess());
-      dispatch(getUserProfile());
 
       history.replace("/");
     } catch (error) {

@@ -26,6 +26,21 @@ const getAllArticles = async (req, res, next) => {
   }
 };
 
+const getArticleSearchData = async (req, res, next) => {
+  try {
+    const articles = await prisma.article.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+
+    res.status(200).json(articles);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getArticleById = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
@@ -172,6 +187,7 @@ const createArticle = async (req, res, next) => {
 
 const getBestSellers = async (req, res, next) => {
   try {
+    
     const bestSellersCount = await prisma.article.findMany({
       take: 4,
       select: {
@@ -198,11 +214,47 @@ const getBestSellers = async (req, res, next) => {
   }
 };
 
+const getRecommended = async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id);
+    const recommendedCount = await prisma.article.findMany({
+      take: 10,
+      where:{
+        category: {
+          id
+        }
+      },
+      select: {
+        id: true,
+        name: true,
+        img: true,
+        price: true,
+        rating: {
+          select: {
+            rating: true,
+          },
+        },
+      },
+      orderBy: {
+        order_items: {
+          _count: "desc",
+        },
+      },
+    });
+
+    res.status(200).json(recommendedCount);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAllArticles,
   getArticleById,
   deleteArticle,
   createArticle,
   getBestSellers,
-  updateArticle
+  updateArticle,
+  getArticleSearchData,
+  getRecommended
 };

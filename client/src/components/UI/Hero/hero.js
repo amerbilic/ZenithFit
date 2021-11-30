@@ -9,7 +9,7 @@ const Hero = () => {
       <Title>UP TO 60% OFF THIS WEEK</Title>
       <Paragraph>What are you waiting for?</Paragraph>
       <ButtonsDiv>
-        <Button onClick={() => history.push("/shop")}>START SHOPPING</Button>
+        <Button hero={true} onClick={() => history.push("/shop")}>START SHOPPING</Button>
       </ButtonsDiv>
     </Container>
   );

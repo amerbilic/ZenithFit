@@ -63,7 +63,6 @@ const SignUp = (props) => {
       });
 
       dispatch(loginSuccess());
-      dispatch(getUserProfile());
       setIsLoading(false);
 
       history.replace("/");
