@@ -13,8 +13,8 @@ import jwt_decode from "jwt-decode";
 // Pages & Components
 import Homepage from "./pages/homepage/homepage";
 import ShopPage from "./pages/shop/shop";
-import Announcement from "./components/UI/Announcement/announcement";
 import Authorization from "./pages/authorization/authorization";
+import Announcement from "./components/UI/Announcement/announcement";
 import Checkout from "./pages/checkout/checkout";
 import Navbar from "./components/UI/Navbar/navbar";
 import Navitem from "./components/UI/Navitem/navitem";
@@ -113,7 +113,7 @@ const App = () => {
             <NavDropDown categories={Weight} />
           </Navitem>
           <Link className="GoalSelector" to="/goals">
-            Goal Selector
+            Goals
           </Link>
         </Navbar>
       </div>

@@ -1,13 +1,12 @@
 import React from "react";
-import "./collection-preview.styles.scss";
+import {Overview, Title, Preview} from './collections-preview.styles'
 import Product from "../product/product.";
-import {Link} from 'react-router-dom';
 
 const CollectionPreview = (props) => {
   return (
-    <div className="collection-preview">
-      <Link to={`/shop/${props.title}`} className="title">{props.title.toUpperCase()}</Link>
-      <div className="preview">
+    <Overview>
+      <Title to={`/shop/${props.title}`} >{props.title.toUpperCase()}</Title>
+      <Preview >
         {props.items
           .filter((item, idx) => idx < 4)
           .map((item) => {
@@ -22,8 +21,8 @@ const CollectionPreview = (props) => {
               />
             );
           })}
-      </div>
-    </div>
+      </Preview>
+    </Overview>
   );
 };
 

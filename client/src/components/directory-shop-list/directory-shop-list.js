@@ -5,8 +5,13 @@ import {
   fetchGoalsDirectoryList,
 } from "../../store/Articles/articles-actions";
 import { useParams } from "react-router-dom";
-import "./directory-shop-list.styles.scss";
 import DirectoryShopItem from "../directory-shop-item/directory-shop-item";
+import styled from "styled-components";
+
+export const Overview = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const DirectoryShopList = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +27,7 @@ const DirectoryShopList = (props) => {
   }, []);
 
   return (
-    <div className="collections-overview">
+    <Overview>
       {!isLoading ? (
         listItems.map((item) => {
           return (
@@ -37,7 +42,7 @@ const DirectoryShopList = (props) => {
         <p>Loading...</p>
       )}
       {}
-    </div>
+    </Overview>
   );
 };
 

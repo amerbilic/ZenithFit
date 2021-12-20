@@ -61,7 +61,7 @@ export const ProfileBox = styled.div`
   margin-bottom: 20px;
 
   ${mobile({
-    width:"90%"
+    width:"90%",
   })}
 
   
@@ -69,6 +69,9 @@ export const ProfileBox = styled.div`
 
 export const Text = styled.span`
   font-weight: 500;
+  ${mobile({
+    display:"none"
+  })}
 `;
 
 export const RecentOrders = styled.div`

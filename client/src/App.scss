@@ -1,7 +1,7 @@
 :root {
   --bg: #2b50aa;
   --bg-accent: #484a4d;
-  --bg-highlight: #5DFDCB;
+  --bg-highlight: #5dfdcb;
   --text-color: #dadce1;
   --nav-size: 35px;
   --border-radius: 8px;
@@ -23,8 +23,20 @@ a {
   color: black;
 }
 
+body::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #4c4c57;
+}
+
 .sticky {
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 10;
 }

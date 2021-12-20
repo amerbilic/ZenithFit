@@ -9,13 +9,21 @@ import {
 } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
-import {mobile} from '../../../responsive';
+import {mobile,tablet, large} from '../../../responsive';
 import {Link} from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
   ${mobile({
     flexDirection: 'column',
+  })}
+
+${tablet({
+    flexDirection: 'column',
+  })}
+
+  ${large({
+    flexDirection: 'row'
   })}
 
 `;

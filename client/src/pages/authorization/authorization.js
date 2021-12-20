@@ -1,10 +1,24 @@
-import "./authorization.styles.scss";
+import styled from "styled-components";
 import SignIn from "../../components/sign-in/sign-in";
 import SignUp from "../../components/sign-up/sign-up";
 import { motion } from "framer-motion";
 import Footer from "../../components/UI/Footer/footer";
 import { useEffect } from "react";
 import Newsletter from "../../components/UI/Newsletter/newsletter";
+
+const Wrapper = styled.div`
+  width: 850px;
+  display: flex;
+  justify-content: space-between;
+  margin: 30px auto;
+  @media only screen and (max-width: 380px) {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+`;
 
 const Authorization = () => {
   useEffect(() => {
@@ -21,10 +35,10 @@ const Authorization = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="sign-in-and-sign-up">
+      <Wrapper>
         <SignIn />
         <SignUp />
-      </div>
+      </Wrapper>
       <Newsletter />
       <Footer />
     </motion.div>

@@ -1,4 +1,4 @@
-import "./collection.styles.scss";
+import { Wrapper, Title, Items, Loading} from './collection.styles'
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
@@ -28,7 +28,7 @@ const Collection = (props) => {
   if (isLoading) {
     return (
       <section>
-        <p className="collection-loading">Loading...</p>
+        <Loading >Loading...</Loading>
       </section>
     );
   }
@@ -39,16 +39,16 @@ const Collection = (props) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="collection-page">
-        <h2 className="title">{collectionId.toUpperCase()}</h2>
-        <div className="items">
+      <Wrapper >
+        <Title >{collectionId.toUpperCase()}</Title>
+        <Items >
           {!isLoading ? (
             collectionItems.map((item) => <Product key={item.id} {...item} />)
           ) : (
             <div>Loading...</div>
           )}
-        </div>
-      </div>
+        </Items>
+      </Wrapper>
     </motion.div>
   );
 };

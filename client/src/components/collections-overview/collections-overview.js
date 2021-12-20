@@ -1,8 +1,13 @@
-import "./collections-overview.styles.scss";
 import CollectionPreview from "../collections-preview/collection-preview";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArticlesData } from "../../store/Articles/articles-actions";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const CollectionsOverview = () => {
   const dispatch = useDispatch();
@@ -13,7 +18,7 @@ const CollectionsOverview = () => {
   }, [dispatch]);
 
   return (
-    <div className="collections-overview">
+    <Wrapper>
       {collection.map((item) => {
         return (
           <CollectionPreview
@@ -23,7 +28,7 @@ const CollectionsOverview = () => {
           />
         );
       })}
-    </div>
+    </Wrapper>
   );
 };
 

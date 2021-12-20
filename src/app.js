@@ -3,6 +3,8 @@ const morgan = require("morgan");
 const createError = require("http-errors");
 const cors = require("cors");
 const path = require("path");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
@@ -22,11 +24,17 @@ const userRouter = require("./routes/User/user.router");
 const userPaymentRouter = require("./routes/UserPayment/userPayment.router");
 const userRatingRouter = require("./routes/UserRating/userRating.router");
 const finalizeOrderRouter = require("./routes/FinalizeOrder/finalizeOrder.router");
+const reportsRouter = require("./routes/Reports/reports.router");
 
 const app = express();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(
+  cookieSession({ name: "session", keys: ["amer"], maxAge: 24 * 60 * 60 * 100 })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/address", addressRouter);
 app.use("/articles", articlesRouter);
@@ -42,6 +50,7 @@ app.use("/shoppingsession", shoppingSessionRouter);
 app.use("/users", userRouter);
 app.use("/userpayment", userPaymentRouter);
 app.use("/rating", userRatingRouter);
+app.use("/reports", reportsRouter);
 
 app.post("/payment", (req, res, next) => {
   const body = {
@@ -59,6 +68,31 @@ app.post("/payment", (req, res, next) => {
   });
 });
 
+app.post("/payment-sheet", async (req, res) => {
+  const amount = 100;
+  const customer = await stripe.customers.create();
+  const ephemeralKey = await stripe.ephemeralKeys.create(
+    { customer: customer.id },
+    { apiVersion: "2020-08-27" }
+  );
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount,
+    currency: "usd",
+    customer: customer.id,
+    automatic_payment_methods: {
+      enabled: false,
+    },
+  });
+
+  res.json({
+    paymentIntent: paymentIntent.client_secret,
+    ephemeralKey: ephemeralKey.secret,
+    customer: customer.id,
+    publishableKey:
+      "pk_test_51JUspyLwlYLCgk44mgpftL5N6Cn7Roq0mTImZbkaHUnOF5MEIyGQFYbd3It6ug1jNHqatUjdO1Vr1GDW4zx6VZhH006sBepdLt",
+  });
+});
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 }
@@ -67,7 +101,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
 
-//Error Handler
 app.use(async (req, res, next) => {
   next(createError.NotFound());
 });

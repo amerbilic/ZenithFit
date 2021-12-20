@@ -47,7 +47,7 @@ const Addresses = () => {
 
   useEffect(() => {
     if (user.id) dispatch(fetchUserAddresses(user.id));
-  }, [user, dispatch, addressList]);
+  }, [dispatch]);
 
   const handleClick = () => {
     setNewAddressToggle(!newAddressToggle);
@@ -114,7 +114,7 @@ const Addresses = () => {
                       {address.postalCode}
                     </PostalCode>
                     <ButtonContainer>
-                      <EditButton>Edit</EditButton>
+                    
                       <EditButton
                         onClick={() => {
                           dispatch(deleteUserAddress(address.id));

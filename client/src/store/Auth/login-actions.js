@@ -24,6 +24,10 @@ export const userLogin = (frmData) => {
   });
 };
 
+export const setUserId = (uId) => {
+  userId = uId;
+}
+
 export const userRegister = (frmData) => {
   return new Promise(async (resolve, reject) => {
     try {

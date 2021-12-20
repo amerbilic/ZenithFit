@@ -1,11 +1,12 @@
 import React from "react";
 import Product from "../product/product.";
+import {Overview,Title,Preview} from './directory-shop-item.styles'
 
 const DirectoryShopItem = (props) => {
   return (
-    <div className="collection-preview">
-      <h1 className="title">{props.title.toUpperCase()}</h1>
-      <div className="preview">
+    <Overview >
+      <Title >{props.title.toUpperCase()}</Title>
+      <Preview >
         {props.items
           .filter((item, idx) => idx < 4)
           .map((item) => {
@@ -20,8 +21,8 @@ const DirectoryShopItem = (props) => {
               />
             );
           })}
-      </div>
-    </div>
+      </Preview>
+    </Overview>
   );
 };
 

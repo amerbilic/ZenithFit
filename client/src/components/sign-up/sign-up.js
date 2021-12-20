@@ -1,4 +1,5 @@
 import FormInput from "../form-input/form-input";
+import {Wrapper,Title} from './sign-up.styles'
 import Button from "../UI/Button/button";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -11,8 +12,6 @@ import { userRegister } from "../../store/Auth/login-actions";
 import { getUserProfile } from "../../store/User/user-actions";
 import toast from "react-hot-toast";
 import BounceLoader from "react-spinners/BounceLoader";
-
-import "./sign-up.styles.scss";
 
 const SignUp = (props) => {
   const history = useHistory();
@@ -63,6 +62,7 @@ const SignUp = (props) => {
       });
 
       dispatch(loginSuccess());
+      dispatch(getUserProfile());
       setIsLoading(false);
 
       history.replace("/");
@@ -73,8 +73,8 @@ const SignUp = (props) => {
   };
 
   return (
-    <div className="sign-up">
-      <h2 className="title">I do not have an account</h2>
+    <Wrapper >
+      <Title >I do not have an account</Title>
       <span>Sign up with your email and password</span>
       <form className="sign-up-form" onSubmit={submitHandler}>
         <FormInput
@@ -112,7 +112,7 @@ const SignUp = (props) => {
         {!isLoading && <Button type="submit">Sign up</Button>}
       </form>
         <BounceLoader color="teal" loading={isLoading}/>
-    </div>
+    </Wrapper>
   );
 };
 

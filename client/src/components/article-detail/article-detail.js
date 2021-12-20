@@ -1,7 +1,17 @@
 import { Fragment, useEffect } from "react";
 import { fetchDetailData } from "../../store/Articles/articles-actions";
 import { useSelector, useDispatch } from "react-redux";
-import "./article-detail.styles.scss";
+import {
+  Details,
+  BigImage,
+  BigImageChild,
+  Box,
+  Paragraph,
+  Title,
+  Span,
+  Row,
+  ProductHR,
+} from "./article-detail.styles.js";
 import Button from "../UI/Button/button";
 import StarRatingDetail from "../UI/Star-Rating-Detail/star-rating-detail";
 import { cartActions } from "../../store/index";
@@ -29,25 +39,25 @@ const ArticleDetail = (props) => {
 
   return (
     <Fragment>
-      <div className="details">
-        <div className="big-img">
-          <img src={item.img} alt="" className="big-img-child" />
-        </div>
-        <div className="box">
-          <div className="row">
-            <h2>{item.name}</h2>
-          </div>
+      <Details>
+        <BigImage className="big-img">
+          <BigImageChild src={item.img} alt="" />
+        </BigImage>
+        <Box>
+          <Row>
+            <Title>{item.name}</Title>
+          </Row>
           <StarRatingDetail size={30} rating={rating} />
-          <p>{`${item.desc}`}</p>
-          <hr aria-hidden="true" className="ProductPage_hr"></hr>
-          <span className="ProductPage_price">${item.price}</span>
-          <hr aria-hidden="true" className="ProductPage_hr"></hr>
+          <Paragraph>{`${item.desc}`}</Paragraph>
+          <ProductHR aria-hidden="true"></ProductHR>
+          <Span>${item.price}</Span>
+          <ProductHR aria-hidden="true"></ProductHR>
           <Button className="cartB" onClick={addItemHandler}>
             Add to cart
           </Button>
-        </div>
-      </div>
-      {item.category ? <Products recommended={true} articleId={item.id}/> : ""}
+        </Box>
+      </Details>
+      {item.category ? <Products recommended={true} articleId={item.id} /> : ""}
     </Fragment>
   );
 };

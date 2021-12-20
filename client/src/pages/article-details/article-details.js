@@ -1,6 +1,13 @@
-import "./article-details.styles.scss";
+import styled from "styled-components";
 import ArticleDetail from "../../components/article-detail/article-detail";
-import { useEffect, Fragment } from "react";
+import { useEffect } from "react";
+
+const Wrapper = styled.div`
+  max-width: 1200px;
+  width: 100%;
+  margin: 100px auto;
+  box-shadow: 0 0 5px #ccc;
+`;
 const ArticleDetails = (props) => {
   useEffect(() => {
     window.scrollTo({
@@ -12,11 +19,9 @@ const ArticleDetails = (props) => {
   const id = props.match.params.itemId;
 
   return (
-    <Fragment>
-      <div className="detail-wrapper">
-        <ArticleDetail id={id} />
-      </div>
-    </Fragment>
+    <Wrapper>
+      <ArticleDetail id={id} />
+    </Wrapper>
   );
 };
 

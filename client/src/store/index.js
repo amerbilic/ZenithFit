@@ -16,7 +16,6 @@ import ordersSlice from "./Orders/ordersSlice";
 import loginReducer from "./Auth/loginSlice";
 import userReducer from "./User/userSlice";
 import adressessReducer from "./Addresses/adressesSlice";
-import paymentCardsReducer from "./Payment-Cards/payment-cardsSlice";
 import goalsSlice from "./Goals/goals";
 
 const cartSlice = createSlice({
@@ -94,7 +93,6 @@ const store = configureStore({
     login: loginReducer,
     user: userReducer,
     addresses: adressessReducer,
-    paymentCards: paymentCardsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

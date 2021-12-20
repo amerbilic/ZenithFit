@@ -1,4 +1,4 @@
-import "./cart-icon.styles.scss";
+import {Wrapper} from './cart-icon.styles'
 import { ShoppingCartOutlined } from "@material-ui/icons";
 import { Badge } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,11 +14,11 @@ const CartIcon = () => {
 
 
   return (
-    <div className="cart-icon" onClick={toggleCartHandler} >
+    <Wrapper onClick={toggleCartHandler} >
       <Badge badgeContent={itemCount} color="secondary">
         <ShoppingCartOutlined />
       </Badge>
-    </div>
+    </Wrapper>
   );
 };
 

@@ -1,6 +1,13 @@
-import "./checkout-item.styles.scss";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/index";
+import {
+  Item,
+  ImageContainer,
+  Image,
+  ItemDescription,
+  RemoveButton,
+  Arrow,
+} from "./checkout-item.styles";
 
 const CheckoutItem = (props) => {
   const dispatch = useDispatch();
@@ -9,27 +16,25 @@ const CheckoutItem = (props) => {
     dispatch(cartActions.removeFromCart(props.id));
   };
 
-  const increaseHandler = () =>{
-      dispatch(cartActions.addToCart(props))
-  }
+  const increaseHandler = () => {
+    dispatch(cartActions.addToCart(props));
+  };
 
   return (
-    <div className="checkout-item">
-      <div className="image-container">
-        <img alt="item" src={props.img} />
-      </div>
-      <span className="name">{props.name}</span>
-      <span className="quantity">
-        <div className="arrow disable-select" onClick={deleteHandler}>&#10094;</div>
+    <Item>
+      <ImageContainer>
+        <Image alt="item" src={props.img} />
+      </ImageContainer>
+      <ItemDescription>{props.name}</ItemDescription>
+      <ItemDescription>
+        <Arrow onClick={deleteHandler}>&#10094;</Arrow>
         {props.quantity}
-        <div className="arrow disable-select" onClick={increaseHandler}>&#10095;</div>
-      </span>
+        <Arrow onClick={increaseHandler}>&#10095;</Arrow>
+      </ItemDescription>
 
-      <span className="price">${props.price}</span>
-      <div className="remove-button disable-select" onClick={deleteHandler}>
-        &#10005;
-      </div>
-    </div>
+      <ItemDescription>${props.price}</ItemDescription>
+      <RemoveButton onClick={deleteHandler}>&#10005;</RemoveButton>
+    </Item>
   );
 };
 

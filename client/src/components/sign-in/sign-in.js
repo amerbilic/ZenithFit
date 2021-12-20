@@ -1,4 +1,4 @@
-import "./sign-in.styles.scss";
+import {Wrapper} from './sign-in.styles'
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import FormInput from "../form-input/form-input";
@@ -9,8 +9,8 @@ import {
   loginSuccess,
   loginFail,
 } from "../../store/Auth/loginSlice";
-import { userLogin } from "../../store/Auth/login-actions";
 import { getUserProfile } from "../../store/User/user-actions";
+import { userLogin } from "../../store/Auth/login-actions";
 import BounceLoader from "react-spinners/BounceLoader";
 import toast from "react-hot-toast";
 
@@ -45,6 +45,7 @@ const SignIn = () => {
       }
 
       dispatch(loginSuccess());
+      dispatch(getUserProfile());
 
       history.replace("/");
     } catch (error) {
@@ -57,7 +58,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-in">
+    <Wrapper>
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={submitHandler}>
@@ -80,7 +81,7 @@ const SignIn = () => {
         {!isLoading && <Button type="submit">Sign in</Button>}
         <BounceLoader color="teal" loading={isLoading} size={30} />
       </form>
-    </div>
+    </Wrapper>
   );
 };
 

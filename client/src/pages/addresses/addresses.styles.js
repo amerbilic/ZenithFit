@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Select from "react-select";
-import Button from "../../components/UI/Button/button";
 import { mobile } from "../../responsive";
 
 export const Container = styled.div`
@@ -200,6 +199,16 @@ export const Address = styled.div`
   color: black;
   width: 90%;
   flex-wrap: wrap;
+
+  ${mobile({
+    width: "85%",
+    margin: "5px",
+    padding: "0",
+    border: "2px solid gray",
+    boxShadow: "none",
+    textAlign: "center",
+    marginLeft: "8px",
+  })}
 `;
 
 export const AddressLine = styled.h4`

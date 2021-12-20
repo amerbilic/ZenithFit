@@ -2,14 +2,61 @@ const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 const createError = require("http-errors");
 const prisma = require("../../helpers/prisma");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const { authSchema, loginSchema } = require("../../helpers/validation.schema");
+const passport = require("passport");
 require("dotenv").config();
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "/auth/google/callback",
+    },
+    async function (accessToken, refreshToken, profile, done) {
+      const user = await prisma.user.findFirst({
+        where: {
+          email: profile.emails[0].value,
+        },
+      });
+
+      if(!user) {
+       const newUser = await prisma.user.create({
+          data: {
+            email: profile.emails[0].value,
+            password: "123456",
+            firstname: profile.name.givenName,
+            lastname: profile.name.familyName,
+            status: 1,
+            username: profile.emails[0].value,
+          },
+          select: {
+            id: true,
+            email: true,
+            username: true,
+          },
+        });
+        done(null, newUser);
+      }
+
+      done(null, user);
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 const signUp = async (req, res, next) => {
   try {
     const { password, email, username, firstname, lastname, telephone } =
       req.body;
-
     const result = await authSchema.validateAsync(req.body);
 
     const userEmail = await prisma.user.findFirst({
@@ -97,6 +144,7 @@ const userLogin = async (req, res, next) => {
         password: true,
         status: true,
         id: true,
+        status: true,
       },
     });
 

@@ -6,9 +6,9 @@ const getAllUsers = async (req, res, next) => {
   try {
     const getUsers = await prisma.user.findMany({
       select: {
-        id:true,
+        id: true,
         username: true,
-        email:true,
+        email: true,
         firstname: true,
         lastname: true,
         telephone: true,
@@ -81,6 +81,8 @@ const updateUser = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
     const { username, firstname, lastname, password, newPassword } = req.body;
+
+    console.log(username, firstname, lastname, password)
 
     let hashedPassword;
     const getUser = await prisma.user.findFirst({

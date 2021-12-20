@@ -1,4 +1,4 @@
-import "./nav-dropdown.styles.scss";
+import {Wrapper} from './nav-dropdown.styles'
 import NavDropDownItem from "../Nav-Dropdown-Item/nav-dropdown-item";
 import { useRef, useEffect } from "react";
 
@@ -23,14 +23,14 @@ const NavDropDown = (props) => {
 
   useOutSideAlert(navitemRef);
   return (
-    <div className="nav-dropdown" onClick={props.toggleOff} ref={navitemRef}>
+    <Wrapper onClick={props.toggleOff} ref={navitemRef}>
       {props.toggleDropdown &&
         items.map((item, i) => (
           <NavDropDownItem key={i} link={items[i]}>
             {items[i]}
           </NavDropDownItem>
         ))}
-    </div>
+    </Wrapper>
   );
 };
 

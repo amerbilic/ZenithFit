@@ -13,6 +13,9 @@ export const Container = styled.div`
   object-fit: contain;
   justify-content: center;
   overflow: hidden;
+  ${mobile({
+    display:"none"
+  })}
 `;
 
 export const Title = styled.h1`
@@ -20,8 +23,7 @@ export const Title = styled.h1`
   padding: 20px 0px;
 
   ${mobile({
-    padding: "0",
-    fontSize: "25px",
+   display:"none"
   })}
 `;
 
@@ -29,6 +31,9 @@ export const Paragraph = styled.p`
   color: white;
   font-size: 20px;
   padding: 20px 0px;
+  ${mobile({
+   display:"none"
+  })}
 `;
 
 export const ButtonsDiv = styled.div`

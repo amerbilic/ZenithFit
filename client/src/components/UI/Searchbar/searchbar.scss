@@ -36,7 +36,7 @@ input:focus {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow: hidden;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 .dataResult::-webkit-scrollbar {
@@ -64,4 +64,26 @@ input:focus {
 
 #clearBtn {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  #searchBarId {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .search {
+    width: 150px;
+    height: 12px;
+    padding:7px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .search {
+    width: 200px;
+    height: 12px;
+    padding:8px;
+  }
 }

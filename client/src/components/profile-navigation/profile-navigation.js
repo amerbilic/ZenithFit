@@ -4,7 +4,6 @@ import {
   Home,
   ListAlt,
   LocationOn,
-  Payment,
 } from "@material-ui/icons";
 import {
   Line,
@@ -57,12 +56,6 @@ const ProfileNavigation = () => {
             <LocationOn />
           </Icon>
           Addresses
-        </NavLink>
-        <NavLink to="/profile/cards">
-          <Icon>
-            <Payment />
-          </Icon>
-          Payment Cards
         </NavLink>
       </OptionList>
       <Line style={{ width: "80%" }} />

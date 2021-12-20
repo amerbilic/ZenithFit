@@ -1,11 +1,12 @@
 import React from "react";
-import SearchBar from '../Searchbar/searchbar';
-import { Fragment, useEffect } from "react";
+import SearchBar from "../Searchbar/searchbar";
+import { Fragment, useEffect, useState } from "react";
 import CartDropdown from "../Cart-Dropdown/cart-dropdown";
 import CartIcon from "../Cart-Icon/cart-icon";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from 'axios';
 import { logOut } from "../../../store/Auth/loginSlice";
 import {
   Container,
@@ -17,9 +18,12 @@ import {
   Center,
   Right,
   MenuItem,
+  ToggleHamburger,
+  Bar,
 } from "./header-navbar.styles";
 
 const HeaderNavbar = () => {
+  const [toggleHamburger, setToggleHamburger] = useState(false);
   const isAuth = useSelector((state) => state.login.isAuth);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,33 +34,63 @@ const HeaderNavbar = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("expTime");
     dispatch(logOut());
+    axios.get("/logout");
     history.replace("/");
+  };
+
+  const toggleMenu = () => {
+    setToggleHamburger(!toggleHamburger);
   };
 
   useEffect(() => {}, [cartToggle]);
 
   return (
     <Fragment>
-      <Container>
-        <Wrapper>
+      <Container style={toggleHamburger ? { height: "80px" } : null}>
+        <Wrapper style={toggleHamburger ? { flexDirection: "column" } : null}>
           <Left>
+            <ToggleHamburger href="#" onClick={toggleMenu}>
+              <Bar></Bar>
+              <Bar></Bar>
+              <Bar></Bar>
+            </ToggleHamburger>
             <Language>EN</Language>
-            <SearchBar placeholder={"Search..."}/>
+            <SearchBar placeholder={"Search..."} />
           </Left>
           <Center>
             <LinkLogo to="/">ZENITH FIT.</LinkLogo>
           </Center>
           <Right>
-            <LinkItem to="/shop">SHOP</LinkItem>
+            <LinkItem
+              style={toggleHamburger ? { display: "block" } : null}
+              to="/shop"
+            >
+              SHOP
+            </LinkItem>
             {isAuth ? (
               <Fragment>
-                <LinkItem to="/profile">PROFILE</LinkItem>
-                <LinkItem as="div" to="/" onClick={logoutHandler}>
+                <LinkItem
+                  style={toggleHamburger ? { display: "block" } : null}
+                  to="/profile"
+                >
+                  PROFILE
+                </LinkItem>
+                <LinkItem
+                  style={toggleHamburger ? { display: "block" } : null}
+                  as="div"
+                  to="/"
+                  onClick={logoutHandler}
+                >
                   LOGOUT
                 </LinkItem>
               </Fragment>
             ) : (
-              <LinkItem to="/auth">LOGIN</LinkItem>
+              <LinkItem
+                style={toggleHamburger ? { display: "block" } : null}
+                to="/auth"
+              >
+                LOGIN
+              </LinkItem>
             )}
             <MenuItem>
               <CartIcon />
