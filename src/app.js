@@ -3,8 +3,8 @@ const morgan = require("morgan");
 const createError = require("http-errors");
 const cors = require("cors");
 const path = require("path");
-const cookieSession = require("cookie-session");
-const passport = require("passport");
+// const cookieSession = require("cookie-session");
+// const passport = require("passport");
 
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
@@ -30,11 +30,11 @@ const app = express();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(
-  cookieSession({ name: "session", keys: ["amer"], maxAge: 24 * 60 * 60 * 100 })
-);
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(
+//   cookieSession({ name: "session", keys: ["amer"], maxAge: 24 * 60 * 60 * 100 })
+// );
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use("/address", addressRouter);
 app.use("/articles", articlesRouter);
